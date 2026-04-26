@@ -13,12 +13,12 @@
 #include <stdio.h>
 #include "libft.h"
 
-int	ft_isalnum(int c)
+int ft_isalnum(int c)
 {
 	return (
-		(c >= 48 && c <= 57) || // digit
-		(c >= 65 && c <= 90) || // lower
-		(c >= 97 && c <= 122) // upper
+			(c >= 48 && c <= 57) || // digit
+			(c >= 65 && c <= 90) || // upper
+			(c >= 97 && c <= 122)		// lower
 	);
 }
 

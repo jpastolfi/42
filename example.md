@@ -1,39 +1,41 @@
-*This project has been created as part of the 42 curriculum by [jpastolfi](https://github.com/jpastolfi).*
+*This project has been created as part of the 42 curriculum by [jcosta-a](https://profile-v3.intra.42.fr/users/jcosta-a).*
 
-# libft
+# 📚 Libft
 ![Language](https://img.shields.io/badge/Language-C-blue)
 ![Norm](https://img.shields.io/badge/Norm-42-black)
+![Grade](https://img.shields.io/badge/Grade-100%2F100-brightgreen)
+![Pipeline Status](https://gitlab.com/ja-de_42-lisboa/1-common-core/libft/badges/master/pipeline.svg)
 
 This repository contains my implementation of **libft**, the first project of the 42 common core curriculum at **42 Lisboa**, completed in 2026.
 
 ---
 
-## Description
+## 📖 Description
 
-**Libft** is a custom C library built from scratch. The goal is to re-implement a set of standard C library functions — as well as additional utility functions — without relying on the standard library. This project is the foundation of the 42 curriculum: the resulting `libft.a` static library will be reused in virtually every future project.
+**Libft** is a custom C library built from scratch. The goal is to re-implement a set of standard C library functions — as well as additional utility functions — also relying on `libc`. This project is the foundation of the 42 curriculum: the resulting `libft.a` static library will be reused in virtually every future project.
 
 The library is divided into three parts:
 
 - **Part 1 — Libc functions:** Re-implementations of standard functions from `<string.h>`, `<ctype.h>`, `<stdlib.h>`, and `<strings.h>`, prefixed with `ft_`.
 - **Part 2 — Additional functions:** Utility functions not found in libc but useful in everyday C programming (e.g. `ft_substr`, `ft_split`, `ft_itoa`, `ft_putendl_fd`).
-- **Bonus — Linked list functions:** A set of functions to create and manipulate singly linked lists using the `t_list` structure.
+- **Part 3 — Linked list functions:** A set of functions to create and manipulate singly linked lists using the `t_list` structure.
 
 ---
 
-## Tech Stack & Rules
+## 🛠️ Tech Stack & Rules
 
-- **Language:** C
-- **Compiler:** `cc` with `-Wall -Wextra -Werror` flags
-- **Standard:** All files must follow the **42 Norm**
-- **Header:** Every `.c` file includes the mandatory 42 header
-- **Authorized functions:** `malloc`, `free`, `write`
-- **No global variables or `for` loops allowed**
+* **Language:** C
+* **Compiler:** `cc` with `-Wall -Wextra -Werror` flags
+* **Standard:** All files must follow the **42 Norm**
+* **Header:** Every `.c` file includes the mandatory 42 header
+* **Authorized Functions:** `malloc`, `free`, `write`
+* **No global variables or `for` loops allowed**
 
 ---
 
-## Function Reference
+## 📖 Library Description List
 
-### Part 1 — Libc Functions
+### Part 1 — Libc Functions Re-implementation
 
 | Function | Prototype | Description |
 | :--- | :--- | :--- |
@@ -42,9 +44,9 @@ The library is divided into three parts:
 | `ft_isalnum` | `int ft_isalnum(int c)` | Returns non-zero if `c` is alphanumeric. |
 | `ft_isascii` | `int ft_isascii(int c)` | Returns non-zero if `c` is a 7-bit ASCII character. |
 | `ft_isprint` | `int ft_isprint(int c)` | Returns non-zero if `c` is a printable character. |
-| `ft_strlen` | `size_t ft_strlen(const char *s)` | Returns the length of the string `s`. |
+| `ft_strlen` | `size_t ft_strlen(const char *str)` | Returns the length of the string `str`. |
 | `ft_memset` | `void *ft_memset(void *s, int c, size_t n)` | Fills the first `n` bytes of `s` with byte `c`. |
-| `ft_bzero` | `void ft_bzero(void *b, size_t len)` | Zeroes the first `n` bytes of `s`. |
+| `ft_bzero` | `void ft_bzero(void *s, size_t n)` | Zeroes the first `n` bytes of `s`. |
 | `ft_memcpy` | `void *ft_memcpy(void *dest, const void *src, size_t n)` | Copies `n` bytes from `src` to `dest` (non-overlapping). |
 | `ft_memmove` | `void *ft_memmove(void *dest, const void *src, size_t n)` | Copies `n` bytes from `src` to `dest` (overlap-safe). |
 | `ft_strlcpy` | `size_t ft_strlcpy(char *dst, const char *src, size_t size)` | Size-bounded copy of `src` into `dst`. |
@@ -77,7 +79,7 @@ The library is divided into three parts:
 | `ft_putendl_fd` | `void ft_putendl_fd(char *s, int fd)` | Writes string `s` followed by a newline to file descriptor `fd`. |
 | `ft_putnbr_fd` | `void ft_putnbr_fd(int n, int fd)` | Writes integer `n` to file descriptor `fd`. |
 
-### Bonus — Linked-List Functions
+### Part 3 — Linked-List Functions
 
 | Function | Prototype | Description |
 | :--- | :--- | :--- |
@@ -103,32 +105,32 @@ typedef struct s_list
 
 ---
 
-## Usage
+## 🚀 Instructions
 
 ### Compilation
 
 Clone the repository and run `make` to compile the library:
 
 ```bash
-git clone <repository-url>
+git clone https://gitlab.com/ja-de_42-lisboa/1-common-core/libft
 cd libft
 make
 ```
 
 This generates `libft.a` — the static library archive.
 
-### Makefile Rules
+### Available Makefile Rules
 
 | Rule | Description |
 | :--- | :--- |
-| `make` / `make all` | Compiles all source files (Parts 1, 2, and bonus). |
+| `make` / `make all` | Compiles all functions (Part 1, 2 and 3). |
 | `make clean` | Removes object files (`.o`). |
 | `make fclean` | Removes object files and the `libft.a` archive. |
 | `make re` | Runs `fclean` then `all`. |
 
 ### Using the Library in Your Project
 
-Include the header and link the archive when compiling your project:
+To use `libft` in another project, include the header and link the archive:
 
 ```bash
 cc -Wall -Wextra -Werror main.c -L. -lft -o my_program
@@ -139,32 +141,34 @@ Make sure `libft.h` and `libft.a` are accessible from your project's directory (
 
 ---
 
-## Resources
+## 📚 Resources
 
-### Documentation
+### Documentation & References
 
-- [**man7.org — Linux man pages**](https://man7.org/linux/man-pages/) — Reference manual pages for every libc function reimplemented here (e.g. `man 3 memcpy`).
+- [**man7.org — Linux man pages**](https://man7.org/linux/man-pages/) — Detailed manual pages for every libc function (e.g. `man 3 memcpy`).
 - [**42 Norm — norminette**](https://github.com/42School/norminette) — The official 42 coding style enforcer. Every file must pass norminette before submission.
 
-### Videos
+### Video Tutorials & Foundations
+
+A set of video tutorials that helped build a stronger understanding some of the concepts applied in this project:
 
 | Video | Topic |
 | :--- | :--- |
-| [Compilation Phases in C — Adriano Santos](https://www.youtube.com/watch?v=QbMLHmjEbSY) | How `.c` files go through preprocessing, compilation, assembly, and linking into an executable or archive. |
-| [Stack and Heap Memory — Mike Shah](https://www.youtube.com/watch?v=sXFVaRtobYU&list=PLvv0ScY6vfd8M-Mi_Vyrg7KgISTW3Sklt&index=4) | How stack and heap memory differ, how dynamic allocation works, and why this matters for `malloc` and `free`. |
+| [Compilation Phases in C - Adriano Santos](https://www.youtube.com/watch?v=QbMLHmjEbSY) | How `.c` files go through preprocessing, compilation, assembly, and linking into an executable or archive. |
+| [Understanding stack and heap memory — Mike Shah](https://www.youtube.com/watch?v=sXFVaRtobYU&list=PLvv0ScY6vfd8M-Mi_Vyrg7KgISTW3Sklt&index=4) | How stack and heap memory differ, how dynamic allocation works, and why this matters for functions like `malloc` and `free`. |
 | [memset, memcpy, strcpy, memmove — Mike Shah](https://www.youtube.com/watch?v=TGlePWhNgY0&list=PLvv0ScY6vfd8M-Mi_Vyrg7KgISTW3Sklt&index=18) | Deep dive into key memory manipulation functions — their differences, use cases, and how to re-implement them safely. |
 | [Learn Linked Lists in 13 minutes — Bro Code](https://www.youtube.com/watch?v=N6dOwBde7-M) | Building and traversing singly linked lists — directly applied in the bonus part of this project. |
 
 ### AI Usage
 
-AI (Claude) was used during this project for the following purposes:
+AI (Claude & Gemini) was used during this project for the following purposes:
 
-- **Concept clarification:** understanding the exact behaviour of functions such as `ft_strlcat`, `ft_memmove`, and `ft_strnstr` by comparing man page descriptions with alternative explanations.
+- **Concept clarification:** understanding the exact behaviour of functions such as `ft_strlcat`, `ft_memmove`, and `ft_strnstr` by comparing descriptions from the man pages with alternative explanations.
 - **Code review:** checking that implementations matched the expected libc behaviour described in the subject.
-- **README writing:** drafting and structuring this document.
+- **README writing:** Drafting and structuring this README document.
 
 AI was **not** used to generate or write any C source code submitted as part of this project.
 
 ---
 
-Developed by [Joao Astolfi](https://github.com/jpastolfi) — 42 Lisboa, 2026
+Developed by [Jonathan Alves](https://gitlab.com/ja-de_42-lisboa) — 42 Lisboa, 2026

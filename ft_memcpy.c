@@ -12,21 +12,20 @@
 
 #include <stddef.h>
 #include <stdio.h>
+#include <string.h>
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void *ft_memcpy(void *dest, const void *src, size_t n)
 {
-	size_t			index;
-	unsigned char	*dest_ptr;
-	unsigned char	*src_ptr;
+	size_t index;
+	unsigned char *dest_ptr;
+	unsigned char *src_ptr;
 
 	if (!dest && !src)
-	{
 		return (NULL);
-	}
 	index = 0;
-	dest_ptr = (unsigned char *) dest;
-	src_ptr = (unsigned char *) src;
+	dest_ptr = (unsigned char *)dest;
+	src_ptr = (unsigned char *)src;
 	while (index < n)
 	{
 		dest_ptr[index] = src_ptr[index];
@@ -35,13 +34,14 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-/* int main(void)
+int main(void)
 {
-	unsigned char first[10] = {"Batata"};
-	unsigned char second[10] = {"Camelo"};
-	printf("first before: %s\n", first);
-	printf("second before: %s\n", second);
-	ft_memcpy(&first, &second, 6);
-	printf("first after: %s\n", first);
-	printf("second after: %s\n", second);
-} */
+	unsigned char dest[10] = {"Batata"};
+	unsigned char src[10] = {"Camelo"};
+	printf("dest before: %s\n", dest);
+	printf("src before: %s\n", src);
+	// ft_memcpy(&dest, &src, 3);
+	memcpy(&dest, &src, 3);
+	printf("dest after: %s\n", dest);
+	printf("src after: %s\n", src);
+}
