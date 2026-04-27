@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by [jpastolfi](https://github.com/jpastolfi).*
+*This project has been created as part of the 42 curriculum by jastolfi.*
 
 # libft
 ![Language](https://img.shields.io/badge/Language-C-blue)
@@ -26,8 +26,6 @@ The library is divided into three parts:
 - **Compiler:** `cc` with `-Wall -Wextra -Werror` flags
 - **Standard:** All files must follow the **42 Norm**
 - **Header:** Every `.c` file includes the mandatory 42 header
-- **Authorized functions:** `malloc`, `free`, `write`
-- **No global variables or `for` loops allowed**
 
 ---
 
@@ -77,7 +75,7 @@ The library is divided into three parts:
 | `ft_putendl_fd` | `void ft_putendl_fd(char *s, int fd)` | Writes string `s` followed by a newline to file descriptor `fd`. |
 | `ft_putnbr_fd` | `void ft_putnbr_fd(int n, int fd)` | Writes integer `n` to file descriptor `fd`. |
 
-### Bonus — Linked-List Functions
+### Linked-List Functions
 
 | Function | Prototype | Description |
 | :--- | :--- | :--- |
@@ -103,7 +101,7 @@ typedef struct s_list
 
 ---
 
-## Usage
+## Instructions
 
 ### Compilation
 
@@ -153,7 +151,7 @@ Make sure `libft.h` and `libft.a` are accessible from your project's directory (
 | [Compilation Phases in C — Adriano Santos](https://www.youtube.com/watch?v=QbMLHmjEbSY) | How `.c` files go through preprocessing, compilation, assembly, and linking into an executable or archive. |
 | [Stack and Heap Memory — Mike Shah](https://www.youtube.com/watch?v=sXFVaRtobYU&list=PLvv0ScY6vfd8M-Mi_Vyrg7KgISTW3Sklt&index=4) | How stack and heap memory differ, how dynamic allocation works, and why this matters for `malloc` and `free`. |
 | [memset, memcpy, strcpy, memmove — Mike Shah](https://www.youtube.com/watch?v=TGlePWhNgY0&list=PLvv0ScY6vfd8M-Mi_Vyrg7KgISTW3Sklt&index=18) | Deep dive into key memory manipulation functions — their differences, use cases, and how to re-implement them safely. |
-| [Learn Linked Lists in 13 minutes — Bro Code](https://www.youtube.com/watch?v=N6dOwBde7-M) | Building and traversing singly linked lists — directly applied in the bonus part of this project. |
+| [Learn Linked Lists in 13 minutes — Bro Code](https://www.youtube.com/watch?v=N6dOwBde7-M) | Building and traversing singly linked lists. |
 
 ### AI Usage
 
