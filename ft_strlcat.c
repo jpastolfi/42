@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include "libft.h"
 #include <bsd/string.h>
+#include <string.h>
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
@@ -33,3 +34,17 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	dst[dst_len + index] = '\0';
 	return (dst_len + src_len);
 }
+
+/* int main(void)
+{
+	char   dst1[20] = "Hello";
+	char   dst2[20] = "Hello";
+	size_t r1;
+	size_t r2;
+
+	r1 = ft_strlcat(dst1, " World", 10);
+	r2 = strlcat(dst2, " World", 10);
+	printf("dst: ft='%s' orig='%s' %s\n",
+		dst1, dst2, strcmp(dst1, dst2) == 0 ? "OK" : "FAIL");
+	printf("ret: ft=%zu orig=%zu %s\n", r1, r2, r1 == r2 ? "OK" : "FAIL");
+} */

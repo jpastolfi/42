@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include <stdio.h>
+#include <string.h>
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -36,17 +37,21 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return ((unsigned char)s1[index] - (unsigned char)s2[index]);
 }
 
-/* int main() {
-	char fst[] = "First";
-	char scnd[] = "First";
-	printf("%d\n", ft_strncmp(fst, scnd, 5));
-	char thrd[] = "Fire";
-	char frth[] = "Fi";
-	printf("%d\n", ft_strncmp(thrd, frth, 3));
-	char fifth[] = "test";
-	char sixth[] = "test";
-	sixth[3] = -128;
-	printf("%d\n", ft_strncmp(fifth, sixth, 4));
-	sixth[3] = -42;
-	printf("%d\n", ft_strncmp(fifth, sixth, 4));
+/* int main(void)
+{
+	int ft;
+	int orig;
+
+	ft = ft_strncmp("First", "First", 5);
+	orig = strncmp("First", "First", 5);
+	printf("\"First\" vs \"First\" n=5: ft=%d orig=%d %s\n",
+		ft, orig, ft == 0 && orig == 0 ? "OK" : "FAIL");
+	ft = ft_strncmp("Fire", "Fi", 3);
+	orig = strncmp("Fire", "Fi", 3);
+	printf("\"Fire\" vs \"Fi\" n=3: ft=%d orig=%d %s\n",
+		ft, orig, (ft > 0 && orig > 0) ? "OK" : "FAIL");
+	ft = ft_strncmp("test", "test\x80", 4);
+	orig = strncmp("test", "test\x80", 4);
+	printf("\"test\" vs \"test\\x80\" n=4: ft=%d orig=%d %s\n",
+		ft, orig, ft == 0 && orig == 0 ? "OK" : "FAIL");
 } */

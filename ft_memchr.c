@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include <stdio.h>
+#include <string.h>
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
@@ -35,7 +36,11 @@ void	*ft_memchr(const void *s, int c, size_t n)
 
 /* int main(void)
 {
-	char *c = "BATATA";
-	int n = 65;
-	printf("Address found: %p\n", ft_memchr(c, n, 10));
+	const char *s = "BATATA";
+	char *ft = (char *)ft_memchr(s, 'A', 6);
+	char *orig = (char *)memchr(s, 'A', 6);
+
+	printf("ft_memchr:  offset=%td\n", ft ? ft - s : -1);
+	printf("memchr:     offset=%td\n", orig ? orig - s : -1);
+	printf("%s\n", ft == orig ? "OK" : "FAIL");
 } */

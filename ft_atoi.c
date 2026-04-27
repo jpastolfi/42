@@ -15,13 +15,6 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <limits.h>
-
-/* int static putnbr(char c)
-{
-	int n = c + 0;
-	return (n);
-} */
-
 int	ft_atoi(const char *nptr)
 {
 	int		index;
@@ -53,9 +46,15 @@ int	ft_atoi(const char *nptr)
 
 /* int main(void)
 {
-	printf("ft_atoi(+42lisboa): %d\n", ft_atoi("+42lisboa"));
-	printf("ft_atoi(-+42): %d\n", ft_atoi("-+42"));
-	printf("ft_atoi(+-42): %d\n", ft_atoi("+-42"));
-	printf("ft_atoi(++INT_MAX): %d\n", ft_atoi("999999999999999999"));
-	printf("ft_atoi(--INT_MIN): %d\n", ft_atoi("-999999999999999999"));
+	const char *tests[] = {"+42lisboa", "42", "-0", "2147483647",
+												 "-2147483648"};
+	int i = 0;
+
+	while (tests[i])
+	{
+		printf("atoi(\"%s\"): ft=%-12d orig=%-12d %s\n",
+					 tests[i], ft_atoi(tests[i]), atoi(tests[i]),
+					 ft_atoi(tests[i]) == atoi(tests[i]) ? "OK" : "DIFF");
+		i++;
+	}
 } */

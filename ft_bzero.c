@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include <stddef.h>
+#include <strings.h>
 #include "libft.h"
 
 void	ft_bzero(void *b, size_t len)
@@ -30,18 +31,16 @@ void	ft_bzero(void *b, size_t len)
 
 /* int main(void)
 {
-	size_t index = 0;
-	char buffer[10] = "Batatatata";
-	while (index < 10)
+	char buf1[10] = "Batatatata";
+	char buf2[10] = "Batatatata";
+	size_t i = 0;
+
+	ft_bzero(buf1, sizeof(buf1));
+	bzero(buf2, sizeof(buf2));
+	while (i < 10)
 	{
-		printf("index: %zu: %c\n", index, buffer[index]);
-		index++;
-	}
-	ft_bzero(buffer, sizeof(buffer));
-	index = 0;
-	while (index < 10)
-	{
-		printf("index: %zu: %c\n", index, buffer[index]);
-		index++;
+		printf("index %zu: ft=%d orig=%d %s\n",
+					 i, buf1[i], buf2[i], buf1[i] == buf2[i] ? "OK" : "FAIL");
+		i++;
 	}
 } */

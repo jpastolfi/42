@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include <stddef.h>
+#include <string.h>
 #include "libft.h"
 
 void	*ft_memset(void *s, int c, size_t n)
@@ -33,12 +34,16 @@ void	*ft_memset(void *s, int c, size_t n)
 
 /* int main(void)
 {
-	char buffer[10];
-	ft_memset(buffer, 65, sizeof(buffer));
-	size_t index = 0;
-	while (index < 10)
+	char buf1[10];
+	char buf2[10];
+	size_t i = 0;
+
+	ft_memset(buf1, 65, sizeof(buf1));
+	memset(buf2, 65, sizeof(buf2));
+	while (i < 10)
 	{
-		printf("index: %zu: %c\n", index, buffer[index]);
-		index++;
+		printf("index %zu: ft='%c' orig='%c' %s\n",
+					 i, buf1[i], buf2[i], buf1[i] == buf2[i] ? "OK" : "FAIL");
+		i++;
 	}
 } */

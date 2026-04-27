@@ -38,12 +38,16 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 /* int main(void)
 {
+	char *ft_ptr = (char *)ft_calloc(3, 4);
+	char *orig = (char *)calloc(3, 4);
 	int i = 0;
 
-	char *ptr = ft_calloc(3, 4);
 	while (i < 12)
 	{
-		printf("%d\n", ptr[i]);
+		printf("index %d: ft=%d orig=%d %s\n",
+					 i, ft_ptr[i], orig[i], ft_ptr[i] == orig[i] ? "OK" : "FAIL");
 		i++;
 	}
+	free(ft_ptr);
+	free(orig);
 } */

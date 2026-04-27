@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include <stdio.h>
+#include <ctype.h>
 
 int	ft_toupper(int c)
 {
@@ -22,12 +23,14 @@ int	ft_toupper(int c)
 	return (c);
 }
 
-/* int main (void)
+/* int main(void)
 {
 	int i = 0;
 	while (i <= 127)
 	{
-		printf("Testing %c: %d\n", (char) i, ft_toupper(i));
+		printf("[%3d]: ft=%-3d orig=%-3d %s\n",
+					 i, ft_toupper(i), toupper(i),
+					 ft_toupper(i) == toupper(i) ? "OK" : "FAIL");
 		i++;
 	}
 } */

@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include "libft.h"
 #include <bsd/string.h>
+#include <string.h>
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
@@ -32,12 +33,14 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 
 /* int main(void)
 {
-	char dest[] = "Batata";
-	char src[] = "Tomate";
-	size_t size = 3;
-	printf("dest antes: %s\n", dest);
-	printf("src antes: %s\n", src);
-	ft_strlcpy(dest, src, size);
-	printf("dest depois: %s\n", dest);
-	printf("src depois: %s\n", src);
+	char dst1[10] = "Batata";
+	char dst2[10] = "Batata";
+	size_t r1;
+	size_t r2;
+
+	r1 = ft_strlcpy(dst1, "Tomate", 4);
+	r2 = strlcpy(dst2, "Tomate", 4);
+	printf("dst: ft='%s' orig='%s' %s\n",
+				 dst1, dst2, strcmp(dst1, dst2) == 0 ? "OK" : "FAIL");
+	printf("ret: ft=%zu orig=%zu %s\n", r1, r2, r1 == r2 ? "OK" : "FAIL");
 } */

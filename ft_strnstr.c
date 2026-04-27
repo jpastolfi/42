@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include <stdio.h>
+#include <string.h>
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
@@ -42,10 +43,20 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	return (NULL);
 }
 
-/* int	main(void)
+/* int main(void)
 {
-	char haystack[30] = "aaabcabcd";
-	printf("Result: %s\n", ft_strnstr("abcccccdef", "cd", 8));
-	printf("Result: %s\n", ft_strnstr(haystack, "a", 1));
-	printf("%s\n", ft_strnstr("    Batata   aaa  ", "Batata", 15));
+	const char *hay = "aaabcabcd";
+	char       *ft;
+	char       *orig;
+
+	ft = ft_strnstr("abcccccdef", "cd", 8);
+	orig = strnstr("abcccccdef", "cd", 8);
+	printf("\"cd\" in \"abcccccdef\" n=8: ft=%s orig=%s %s\n",
+		ft ? ft : "(null)", orig ? orig : "(null)",
+		ft == orig ? "OK" : "FAIL");
+	ft = ft_strnstr(hay, "abc", 9);
+	orig = strnstr(hay, "abc", 9);
+	printf("\"abc\" in \"aaabcabcd\" n=9: ft=%s orig=%s %s\n",
+		ft ? ft : "(null)", orig ? orig : "(null)",
+		ft == orig ? "OK" : "FAIL");
 } */

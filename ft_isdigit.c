@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <ctype.h>
 #include "libft.h"
 
 int	ft_isdigit(int c)
@@ -23,7 +24,9 @@ int	ft_isdigit(int c)
 	int i = 0;
 	while (i <= 127)
 	{
-		printf("Testing %c: %d\n", (char) i, ft_isdigit(i));
+		printf("[%3d]: ft=%-3d orig=%-3d %s\n",
+			i, ft_isdigit(i), isdigit(i),
+			!!ft_isdigit(i) == !!isdigit(i) ? "OK" : "FAIL");
 		i++;
 	}
 } */

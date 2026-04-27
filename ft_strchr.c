@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include <stdio.h>
+#include <string.h>
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -23,14 +24,14 @@ char	*ft_strchr(const char *s, int c)
 	{
 		if (s[index] == (unsigned char)c)
 		{
-			p = (char *) &s[index];
+			p = (char *)&s[index];
 			return (p);
 		}
 		index++;
 	}
 	if (s[index] == (unsigned char)c)
 	{
-		p = (char *) &s[index];
+		p = (char *)&s[index];
 		return (p);
 	}
 	return (NULL);
@@ -39,6 +40,10 @@ char	*ft_strchr(const char *s, int c)
 /* int main(void)
 {
 	char s[] = "Batata";
-	char c = 't';
-	printf("%p\n", ft_strchr(s, c));
+	char *ft = ft_strchr(s, 't');
+	char *orig = strchr(s, 't');
+
+	printf("ft_strchr:  offset=%td\n", ft ? ft - s : -1);
+	printf("strchr:     offset=%td\n", orig ? orig - s : -1);
+	printf("%s\n", ft == orig ? "OK" : "FAIL");
 } */

@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "libft.h"
 
 char	*ft_strdup(const char *s)
@@ -36,3 +37,16 @@ char	*ft_strdup(const char *s)
 	str[index] = '\0';
 	return (str);
 }
+
+/* int main(void)
+{
+	const char *src = "42 Lisboa";
+	char       *ft_result = ft_strdup(src);
+	char       *orig = strdup(src);
+
+	printf("ft_strdup: %s\n", ft_result);
+	printf("strdup:    %s\n", orig);
+	printf("%s\n", strcmp(ft_result, orig) == 0 ? "OK" : "FAIL");
+	free(ft_result);
+	free(orig);
+} */

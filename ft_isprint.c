@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <ctype.h>
 #include "libft.h"
 
 int	ft_isprint(int c)
@@ -18,12 +19,14 @@ int	ft_isprint(int c)
 	return (c >= 32 && c < 127);
 }
 
-/* int main (void)
+/* int main(void)
 {
 	int i = 0;
 	while (i <= 127)
 	{
-		printf("Testing %c: %d\n", (char) i, ft_isprint(i));
+		printf("[%3d]: ft=%-3d orig=%-3d %s\n",
+					 i, ft_isprint(i), isprint(i),
+					 !!ft_isprint(i) == !!isprint(i) ? "OK" : "FAIL");
 		i++;
 	}
 } */

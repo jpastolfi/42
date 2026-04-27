@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include <stdio.h>
+#include <string.h>
 
 char	*ft_strrchr(const char *s, int c)
 {
@@ -33,6 +34,11 @@ char	*ft_strrchr(const char *s, int c)
 
 /* int main(void)
 {
-	printf("%p\n", ft_strrchr("ABCDEF", 'C'));
-	printf("%p\n", ft_strrchr("", 0));
+	char  s[] = "ABCDEF";
+	char  *ft = ft_strrchr(s, 'C');
+	char  *orig = strrchr(s, 'C');
+
+	printf("ft_strrchr: offset=%td\n", ft ? ft - s : -1);
+	printf("strrchr:    offset=%td\n", orig ? orig - s : -1);
+	printf("%s\n", ft == orig ? "OK" : "FAIL");
 } */

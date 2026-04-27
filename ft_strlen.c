@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include <stddef.h>
+#include <string.h>
 #include "libft.h"
 
 size_t	ft_strlen(const char *str)
@@ -26,9 +27,9 @@ size_t	ft_strlen(const char *str)
 	return (counter);
 }
 
-/* int main(int argc, char **argv)
+/* int main(void)
 {
-	if (argc < 2)
-		return (1);
-	printf("%s: %d\n", argv[1], ft_strlen(argv[1]));
+	printf("ft_strlen: %zu\n", ft_strlen("Programação"));
+	printf("strlen:    %zu\n", strlen("Programação"));
+	printf("%s\n", ft_strlen("Programação") == strlen("Programação") ? "OK" : "FAIL");
 } */

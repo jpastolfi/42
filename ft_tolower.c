@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <ctype.h>
 #include "libft.h"
 
 int	ft_tolower(int c)
@@ -22,12 +23,14 @@ int	ft_tolower(int c)
 	return (c);
 }
 
-/* int	main (void)
+/* int main(void)
 {
 	int i = 0;
 	while (i <= 127)
 	{
-		printf("Testing %c: %d\n", (char) i, ft_tolower(i));
+		printf("[%3d]: ft=%-3d orig=%-3d %s\n",
+					 i, ft_tolower(i), tolower(i),
+					 ft_tolower(i) == tolower(i) ? "OK" : "FAIL");
 		i++;
 	}
 } */

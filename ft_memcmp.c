@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include <stdio.h>
+#include <string.h>
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
@@ -37,11 +38,15 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 
 /* int main(void)
 {
-	size_t n = 6;
-	char *s1 = "Codigo";
-	char *s2 = "Codiga";
-	printf("Result: %d\n", ft_memcmp(s1, s2, n));
-	char s[] = {128, 0, 127, 0};
-	char sCpy[] = {128, 0, 127, 0};
-	printf("Result: %d\n", ft_memcmp(s, sCpy, n));
+	int ft;
+	int orig;
+
+	ft = ft_memcmp("Codigo", "Codiga", 6);
+	orig = memcmp("Codigo", "Codiga", 6);
+	printf("\"Codigo\" vs \"Codiga\": ft=%d orig=%d %s\n",
+				 ft, orig, (ft > 0 && orig > 0) ? "OK" : "FAIL");
+	ft = ft_memcmp("Equal", "Equal", 5);
+	orig = memcmp("Equal", "Equal", 5);
+	printf("\"Equal\" vs \"Equal\": ft=%d orig=%d %s\n",
+				 ft, orig, ft == 0 && orig == 0 ? "OK" : "FAIL");
 } */

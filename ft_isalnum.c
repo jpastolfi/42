@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <ctype.h>
 #include "libft.h"
 
 int ft_isalnum(int c)
@@ -22,12 +23,14 @@ int ft_isalnum(int c)
 	);
 }
 
-/* int main (void)
+/* int main(void)
 {
 	int i = 0;
 	while (i <= 127)
 	{
-		printf("Testing %c: %d\n", (char) i, ft_isalnum(i));
+		printf("[%3d]: ft=%-3d orig=%-3d %s\n",
+					 i, ft_isalnum(i), isalnum(i),
+					 !!ft_isalnum(i) == !!isalnum(i) ? "OK" : "FAIL");
 		i++;
 	}
 } */

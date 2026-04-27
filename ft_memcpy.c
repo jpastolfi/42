@@ -34,14 +34,19 @@ void *ft_memcpy(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-int main(void)
+/* int main(void)
 {
-	unsigned char dest[10] = {"Batata"};
-	unsigned char src[10] = {"Camelo"};
-	printf("dest before: %s\n", dest);
-	printf("src before: %s\n", src);
-	// ft_memcpy(&dest, &src, 3);
-	memcpy(&dest, &src, 3);
-	printf("dest after: %s\n", dest);
-	printf("src after: %s\n", src);
-}
+	unsigned char dest1[10] = "Batata";
+	unsigned char dest2[10] = "Batata";
+	unsigned char src[10] = "Camelo";
+	int           i = 0;
+
+	ft_memcpy(dest1, src, 7);
+	memcpy(dest2, src, 7);
+	while (i < 7)
+	{
+		printf("index %d: ft='%c' orig='%c' %s\n",
+			i, dest1[i], dest2[i], dest1[i] == dest2[i] ? "OK" : "FAIL");
+		i++;
+	}
+} */
