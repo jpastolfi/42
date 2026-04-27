@@ -30,11 +30,6 @@ Three issues:
 
 ---
 
-### ft_calloc.c
-**Portability issue:** Uses `__SIZE_MAX__`, which is a GCC-specific predefined macro. The standard portable way is to include `<stdint.h>` or `<limits.h>` and use `SIZE_MAX`. On non-GCC compilers this would fail to compile.
-
----
-
 ### ft_strtrim.c
 **Bug with empty string input:** When `s1 = ""`, `ft_strlen(s1)` returns `0`. Then:
 ```c
@@ -43,11 +38,6 @@ length = ft_strlen(s1) - 1;  // 0 - 1 with size_t = SIZE_MAX (underflow)
 `length` is declared as `size_t` (unsigned), so it wraps to `SIZE_MAX`. The second while loop then evaluates `while (SIZE_MAX > 0)` which is `true`, and attempts to read `s1[SIZE_MAX]`—this is a **buffer overread / undefined behaviour**, almost certainly a segfault on a 64-bit system since that address is unmapped.
 
 The case of an all-trimmed non-empty string (e.g., `ft_strtrim("aaa", "a")`) works by coincidence: `ft_substr` is called with `start >= s_len` and returns `ft_strdup("")` before any real damage occurs.
-
----
-
-### ft_strrchr.c
-**Type mismatch:** `ft_strlen` returns `size_t` but the result is assigned to `int len`. If the string length exceeds `INT_MAX`, `len` overflows and the loop breaks immediately with wrong results. In practice strings are never that long, but it is a latent defect.
 
 ---
 
@@ -67,34 +57,8 @@ The only case the loop does **not** advance is: characters differ, OR we have re
 
 ---
 
-### ft_lstmap.c
-**Memory leak on allocation failure:** When `ft_lstnew(new_content)` fails:
-```c
-new_content = f(lst->content);   // allocates memory
-new_node = ft_lstnew(new_content);
-if (!new_node)
-{
-    // new_content is never freed here — it is leaked
-    ft_lstclear(&result, del);
-    return (NULL);
-}
-```
-If `f` allocates memory (as the commented example with `ft_strdup` does), that allocation is lost. The correct cleanup requires calling `del(new_content)` before calling `ft_lstclear`. This is a genuine memory leak that any memory checker (valgrind) will catch.
-
----
-
 ### ft_striteri.c
 **Unnecessary suppression:** Line 21 has `(void)f;`, which silences an "unused variable" warning—but `f` **is** used on line 25. The cast is harmless but incorrect and confusing.
-
----
-
-### ft_strnstr.c
-**Minor:** The inner loop guards against exceeding `len` with `index + inner_index < len` but does **not** explicitly check `big[index + inner_index] != '\0'`. In practice this is safe: when the outer string's null terminator is reached, it simply mismatches the needle (unless the needle also ends, in which case a correct match is returned). No memory outside the string is read because the null terminator is a valid part of the array. Behaviour is correct, but the logic is subtler than the standard reference implementation.
-
----
-
-### Return values of is*() functions
-`ft_isalpha`, `ft_isdigit`, `ft_isalnum`, `ft_isprint`, `ft_isascii` all return `0` or `1` (from a boolean expression). The C standard only requires a **non-zero** value for true, so `1` is fully compliant. However, older glibc versions returned values from an internal table (e.g., 8 for `isupper`). This difference is irrelevant for 42 evaluation.
 
 ---
 

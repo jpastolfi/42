@@ -18,7 +18,6 @@ char*))
 {
 	int	index;
 
-	(void)f;
 	index = 0;
 	while (s[index])
 	{

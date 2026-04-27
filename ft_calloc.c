@@ -22,7 +22,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 	if (nmemb == 0 || size == 0)
 		return (malloc(0));
-	if (__SIZE_MAX__ / nmemb < size)
+	if (SIZE_MAX / nmemb < size)
 		return (NULL);
 	ptr = (unsigned char *)malloc(nmemb * size);
 	if (ptr == NULL)

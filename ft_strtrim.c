@@ -21,6 +21,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	if (!s1 || !set)
 		return (NULL);
+	if (s1[0] == '\0')
+		return (ft_strdup(""));
 	index = 0;
 	length = ft_strlen(s1) - 1;
 	while (s1[index])
@@ -38,7 +40,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	return (ft_substr(s1, index, length - index + 1));
 }
 
-/* int main(void)
+int main(void)
 {
-	printf("%s\n", ft_strtrim("batatabccbcbcb", "cb"));
-} */
+	printf("%s\n", ft_strtrim("", "a"));
+}

@@ -16,8 +16,8 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int		len;
-	char	*p;
+	size_t		len;
+	char		*p;
 
 	len = ft_strlen(s);
 	while (len >= 0)
@@ -32,7 +32,7 @@ char	*ft_strrchr(const char *s, int c)
 	return (NULL);
 }
 
-/* int main(void)
+int main(void)
 {
 	char  s[] = "ABCDEF";
 	char  *ft = ft_strrchr(s, 'C');
@@ -41,4 +41,4 @@ char	*ft_strrchr(const char *s, int c)
 	printf("ft_strrchr: offset=%td\n", ft ? ft - s : -1);
 	printf("strrchr:    offset=%td\n", orig ? orig - s : -1);
 	printf("%s\n", ft == orig ? "OK" : "FAIL");
-} */
+}
