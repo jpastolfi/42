@@ -6,7 +6,7 @@
 /*   By: jastolfi <jastolfi@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 11:57:00 by jastolfi          #+#    #+#             */
-/*   Updated: 2026/04/15 17:42:15 by jastolfi         ###   ########.fr       */
+/*   Updated: 2026/04/27 16:05:00 by jastolfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 
 /* int main(void)
 {
+	// Compile with -lbsd because of bsd/string.h
 	char dst1[10] = "Batata";
 	char dst2[10] = "Batata";
 	size_t r1;

@@ -6,7 +6,7 @@
 /*   By: jastolfi <jastolfi@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:42:49 by jastolfi          #+#    #+#             */
-/*   Updated: 2026/04/21 13:05:14 by jastolfi         ###   ########.fr       */
+/*   Updated: 2026/04/27 18:27:08 by jastolfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	return (ft_substr(s1, index, length - index + 1));
 }
 
-int main(void)
+/* int main(void)
 {
-	printf("%s\n", ft_strtrim("", "a"));
-}
+	printf("%s\n", ft_strtrim("aabaaa", "a"));
+	printf("%s\n", ft_strtrim("         aabaaa    a       ", " "));
+} */

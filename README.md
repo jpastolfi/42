@@ -158,8 +158,6 @@ Make sure `libft.h` and `libft.a` are accessible from your project's directory (
 AI (Claude) was used during this project for the following purposes:
 
 - **Concept clarification:** understanding the exact behaviour of functions such as `ft_strlcat`, `ft_memmove`, and `ft_strnstr` by comparing man page descriptions with alternative explanations.
-- **Code review:** checking that implementations matched the expected libc behaviour described in the subject.
-- **README writing:** drafting and structuring this document.
 
 AI was **not** used to generate or write any C source code submitted as part of this project.
 

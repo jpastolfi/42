@@ -6,7 +6,7 @@
 /*   By: jastolfi <jastolfi@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 16:32:24 by jastolfi          #+#    #+#             */
-/*   Updated: 2026/04/17 18:14:08 by jastolfi         ###   ########.fr       */
+/*   Updated: 2026/04/27 16:44:18 by jastolfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <limits.h>
+
 int	ft_atoi(const char *nptr)
 {
 	int		index;
@@ -36,8 +37,6 @@ int	ft_atoi(const char *nptr)
 	}
 	while (nptr[index] >= '0' && nptr[index] <= '9')
 	{
-		if (total * 10 > INT_MAX || total * 10 < INT_MIN)
-			return (0);
 		total = (total * 10) + nptr[index] - '0';
 		index++;
 	}
@@ -50,7 +49,7 @@ int	ft_atoi(const char *nptr)
 												 "-2147483648"};
 	int i = 0;
 
-	while (tests[i])
+	while (i < 5)
 	{
 		printf("atoi(\"%s\"): ft=%-12d orig=%-12d %s\n",
 					 tests[i], ft_atoi(tests[i]), atoi(tests[i]),

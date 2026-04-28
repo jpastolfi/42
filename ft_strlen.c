@@ -6,7 +6,7 @@
 /*   By: jastolfi <jastolfi@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:40:47 by jastolfi          #+#    #+#             */
-/*   Updated: 2026/04/15 12:40:38 by jastolfi         ###   ########.fr       */
+/*   Updated: 2026/04/27 16:47:47 by jastolfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ size_t	ft_strlen(const char *str)
 
 /* int main(void)
 {
-	printf("ft_strlen: %zu\n", ft_strlen("Programação"));
-	printf("strlen:    %zu\n", strlen("Programação"));
-	printf("%s\n", ft_strlen("Programação") == strlen("Programação") ? "OK" : "FAIL");
+	printf("ft_strlen: %zu\n", ft_strlen("Programa"));
+	printf("strlen:    %zu\n", strlen("Programa"));
+	printf("%s\n", ft_strlen("Programa") == strlen("Programa") ? "OK" : "FAIL");
 } */

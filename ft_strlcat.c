@@ -6,7 +6,7 @@
 /*   By: jastolfi <jastolfi@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 12:49:16 by jastolfi          #+#    #+#             */
-/*   Updated: 2026/04/17 16:59:55 by jastolfi         ###   ########.fr       */
+/*   Updated: 2026/04/27 16:46:10 by jastolfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 
 /* int main(void)
 {
+	// Compile with -lbsd because of bsd/string.h
 	char   dst1[20] = "Hello";
 	char   dst2[20] = "Hello";
 	size_t r1;

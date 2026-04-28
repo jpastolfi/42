@@ -6,7 +6,7 @@
 /*   By: jastolfi <jastolfi@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 18:26:51 by jastolfi          #+#    #+#             */
-/*   Updated: 2026/04/17 18:09:44 by jastolfi         ###   ########.fr       */
+/*   Updated: 2026/04/27 16:49:05 by jastolfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 	if (nmemb == 0 || size == 0)
 		return (malloc(0));
-	if (SIZE_MAX / nmemb < size)
+	if (__SIZE_MAX__ / nmemb < size)
 		return (NULL);
 	ptr = (unsigned char *)malloc(nmemb * size);
 	if (ptr == NULL)
@@ -45,7 +45,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	while (i < 12)
 	{
 		printf("index %d: ft=%d orig=%d %s\n",
-					 i, ft_ptr[i], orig[i], ft_ptr[i] == orig[i] ? "OK" : "FAIL");
+			i, ft_ptr[i], orig[i], ft_ptr[i] == orig[i] ? "OK" : "FAIL");
 		i++;
 	}
 	free(ft_ptr);
