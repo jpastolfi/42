@@ -1,47 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jastolfi <jastolfi@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/15 17:42:49 by jastolfi          #+#    #+#             */
-/*   Updated: 2026/04/27 18:27:08 by jastolfi         ###   ########.fr       */
+/*   Created: 2026/04/15 17:42:52 by jastolfi          #+#    #+#             */
+/*   Updated: 2026/04/21 13:02:31 by jastolfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_substr(char const *s, unsigned int start,
+size_t len)
 {
 	size_t	index;
-	size_t	length;
+	size_t	s_len;
+	char	*subs;
 
-	if (!s1 || !set)
-		return (NULL);
-	if (s1[0] == '\0')
+	s_len = ft_strlen(s);
+	if (start >= s_len)
 		return (ft_strdup(""));
+	if (len > s_len - start)
+		s_len = s_len - start;
+	else
+		s_len = len;
+	subs = (char *)malloc(s_len + 1);
+	if (!subs)
+		return (NULL);
 	index = 0;
-	length = ft_strlen(s1) - 1;
-	while (s1[index])
+	while (s[start + index] && index < len)
 	{
-		if (!ft_strchr(set, s1[index]))
-			break ;
+		subs[index] = s[start + index];
 		index++;
 	}
-	while (length > 0)
-	{
-		if (!ft_strchr(set, s1[length]))
-			break ;
-		length-- ;
-	}
-	return (ft_substr(s1, index, length - index + 1));
+	subs[index] = '\0';
+	return (subs);
 }
 
 /* int main(void)
 {
-	printf("%s\n", ft_strtrim("aabaaa", "a"));
-	printf("%s\n", ft_strtrim("         aabaaa    a       ", " "));
+	char * str = ft_strdup("1");
+	printf("%s\n", ft_substr(str, 42, 42000000));
 } */
