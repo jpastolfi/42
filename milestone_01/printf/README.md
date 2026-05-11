@@ -1,4 +1,4 @@
-*This project was developed as part of the 42 curriculum by jpastolfi*
+*This project was developed as part of the 42 curriculum by jastolfi*
 
 # ft_printf
 ![Language](https://img.shields.io/badge/Language-C-blue)
@@ -68,6 +68,14 @@ For the `%p` (pointer) specifier, `write_pointer` handles the full 64-bit addres
 | `write_hexadecimal` | `int write_hexadecimal(unsigned int number, char letter)` | Writes an unsigned integer as hexadecimal to stdout. Pass `'x'` for lowercase or `'X'` for uppercase. Returns character count. |
 | `write_pointer` | `int write_pointer(void *pointer)` | Writes a pointer address prefixed with `0x` to stdout using recursive 64-bit-safe hex printing. Prints `(nil)` if NULL. Returns character count. |
 | `dispatcher` | `int dispatcher(char formatter, va_list *args)` | Reads the next variadic argument and calls the appropriate output function based on the specifier character. Returns character count. |
+
+#### Data structure and chosen algorithm
+
+ft_printf iterates through the format string character by character. When it encounters a %, it calls a dispatcher function, which reads the following character and delegates to the appropriate handler based on the conversion specifier.
+
+The va_list is passed by pointer to the dispatcher so that argument traversal is shared across all calls. Passing it by value would copy its internal state and prevent arguments from advancing correctly between handler calls.
+
+All handlers return an int representing the number of characters printed, which ft_printf accumulates into a total that is returned at the end. For pointer output, the value is stored as unsigned long before processing. This is wide enough to hold a memory address on a 64-bit system.
 
 ---
 
@@ -145,7 +153,8 @@ Hex: ff | FF
 
 | Video | Topic |
 | :--- | :--- |
-| [Variadic Functions in C — Jacob Sorber](https://www.youtube.com/watch?v=S-ak715zIIE) | How `va_list`, `va_start`, `va_arg`, and `va_end` work under the hood — the core mechanism behind `ft_printf`. |
+| [Variadic Functions in C — Jacob Sorber](https://www.youtube.com/watch?v=S-ak715zIIE) | How `va_list`, `va_start`, `va_arg`, and `va_end` work under the hood. |
+| [Variadic Functions in C — Geeks for Geeks](https://www.geeksforgeeks.org/c/variadic-functions-in-c/) | Variadic functions introduction and examples |
 
 ### AI Usage
 
@@ -157,4 +166,4 @@ AI was **not** used to generate or write any C source code submitted as part of 
 
 ---
 
-Developed by [jastolfi] — 42 Lisboa, 2026
+Developed by *jastolfi* — 42 Lisboa, 2026
