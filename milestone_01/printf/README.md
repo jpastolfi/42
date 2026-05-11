@@ -1,8 +1,8 @@
+*This project was developed as part of the 42 curriculum by jpastolfi*
+
 # ft_printf
 ![Language](https://img.shields.io/badge/Language-C-blue)
 ![Norm](https://img.shields.io/badge/Norm-42-black)
-
-*This project was developed as part of the 42 curriculum by jpastolfi*
 
 This repository contains my implementation of **ft_printf**, a project from the 42 common core curriculum at **42 Lisboa**, completed in 2026.
 
@@ -18,7 +18,7 @@ The function parses a format string character by character and, whenever it enco
 
 `ft_printf` iterates over the format string one character at a time. When it encounters a `%`, it advances one position and calls `dispatcher`, which reads the specifier character and delegates to the correct output function. Non-specifier characters are written directly via `write_char`.
 
-All output helpers are grouped in `utils.c`. Each one returns the number of bytes it wrote, so the count can be accumulated into `counter` and returned at the end of `ft_printf`.
+Helpers have been developed in `utils.c` and `ft_printf.c`. Each one returns the number of bytes it wrote, so the count can be accumulated into `counter` and returned at the end of `ft_printf`.
 
 For the `%p` (pointer) specifier, `write_pointer` handles the full 64-bit address range using internal recursion — printing the `"0x"` prefix only at the deepest recursion level and unwinding digit by digit. This avoids the truncation that would happen if the address were cast to `unsigned int`.
 
@@ -152,11 +152,9 @@ Hex: ff | FF
 AI was used during this project for the following purposes:
 
 - **Concept clarification:** understanding edge case behaviour such as `%p` with a NULL pointer, the 64-bit truncation issue with pointer addresses, and the exact return value semantics of `printf`.
-- **Code review:** identifying the bug where `write_hexadecimal` received a 64-bit pointer cast to `unsigned int`, silently dropping the upper bits.
-- **README writing:** drafting and structuring this README document.
 
 AI was **not** used to generate or write any C source code submitted as part of this project.
 
 ---
 
-Developed by [jpastolfi](https://github.com/jpastolfi) — 42 Lisboa, 2026
+Developed by [jastolfi] — 42 Lisboa, 2026
