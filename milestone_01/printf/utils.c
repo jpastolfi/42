@@ -15,9 +15,7 @@ int write_string(char *string)
     int index;
 
     if (!string)
-    {
         return(write_string("(null)"));
-    }
 
     index = 0;
     while (string[index])
@@ -87,8 +85,8 @@ int write_pointer(void *pointer)
     int counter;
     unsigned long address;
 
-    if (pointer == NULL)
-        return (write_string("(nill)"));
+    if (!pointer)
+        return (write_string("(nil)"));
     counter = 0;
     address = (unsigned long) pointer;
     if (address >= 16)
