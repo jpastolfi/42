@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jastolfi <jastolfi@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/11 17:44:57 by jastolfi          #+#    #+#             */
+/*   Updated: 2026/05/11 17:53:16 by jastolfi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 char	*ft_strchr(const char *s, int c)
@@ -5,8 +17,8 @@ char	*ft_strchr(const char *s, int c)
 	int		index;
 	char	*p;
 
-    if (!s)
-        return (NULL);
+	if (!s)
+		return (NULL);
 	index = 0;
 	while (s[index])
 	{
@@ -54,22 +66,22 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		total_len;
 	char	*result;
 
-    if (!s1)
-        s1 = "";
+	if (!s1)
+		s1 = "";
 	total_len = ft_strlen(s1) + ft_strlen(s2);
 	result = malloc(total_len + 1);
 	if (!result)
-        return (NULL);
+		return (NULL);
 	index = 0;
 	while (s1[index])
 	{
-        result[index] = s1[index];
+		result[index] = s1[index];
 		index++;
 	}
 	index = 0;
 	while (s2[index])
 	{
-        result[ft_strlen(s1) + index] = s2[index];
+		result[ft_strlen(s1) + index] = s2[index];
 		index++;
 	}
 	result[total_len] = '\0';
