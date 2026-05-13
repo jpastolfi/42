@@ -19,10 +19,11 @@ char	*fill_line(int descriptor)
 	char			buffer[BUFFER_SIZE + 1];
 	char			*final;
 
-	bytes_read = 0;
 	while (!ft_strchr(line, '\n'))
 	{
 		bytes_read = read(descriptor, buffer, BUFFER_SIZE);
+		if (bytes_read == -1)
+			return (free(line), line = NULL, NULL);
 		if (bytes_read == 0)
 		{
 			if (!line || !*line)
@@ -57,10 +58,13 @@ char	*set_line(char **string)
 
 char	*get_next_line(int fd)
 {
+	if (BUFFER_SIZE <= 0)
+    	return (NULL);
 	return (fill_line(fd));
 }
 
-int	main(void)
+# include <stdio.h>
+/* int	main(void)
 {
 	int		fd;
 	char	*line;
@@ -75,4 +79,34 @@ int	main(void)
 	}
 	close(fd);
 	return (0);
+} */
+
+int main(int argc, char **argv)
+{
+    int   fd;
+    char  *line;
+    int   line_num = 0;
+
+    if (argc != 2)
+    {
+        printf("Usage: %s <filename>\n", argv[0]);
+        return (1);
+    }
+    fd = open(argv[1], O_RDONLY);
+    if (fd < 0)
+    {
+        printf("Could not open %s\n", argv[1]);
+        return (1);
+    }
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        line_num++;
+        printf("Line %d: [%s]", line_num, line);
+        if (line[ft_strlen(line) - 1] != '\n')
+            printf("(no trailing newline)");
+        printf("\n");
+        free(line);
+    }
+    close(fd);
+    return (0);
 }
