@@ -65,7 +65,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		index;
 	int		total_len;
 	char	*result;
+	char	*to_free;
 
+	to_free = (char *)s1;
 	if (!s1)
 		s1 = "";
 	total_len = ft_strlen(s1) + ft_strlen(s2);
@@ -85,6 +87,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		index++;
 	}
 	result[total_len] = '\0';
+	free(to_free);
 	return (result);
 }
 

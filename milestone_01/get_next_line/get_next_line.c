@@ -16,20 +16,17 @@ char	*fill_line(int descriptor)
 {
 	static char		*line;
 	int				bytes_read;
-	char			*buffer;
+	char			buffer[BUFFER_SIZE + 1];
 	char			*final;
 
 	bytes_read = 0;
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (buffer == NULL)
-		return (NULL);
 	while (!ft_strchr(line, '\n'))
 	{
 		bytes_read = read(descriptor, buffer, BUFFER_SIZE);
 		if (bytes_read == 0)
 		{
 			if (!line || !*line)
-				return (free(line), free(buffer), line = NULL, NULL);
+				return (free(line), line = NULL, NULL);
 			final = line;
 			line = NULL;
 			return (final);
@@ -55,7 +52,6 @@ char	*set_line(char **string)
 	new_remainder = ft_substr(*string, new_line_index + 1, string_length);
 	free(*string);
 	*string = new_remainder;
-	free(new_remainder);
 	return (line_to_return);
 }
 
@@ -66,8 +62,17 @@ char	*get_next_line(int fd)
 
 int	main(void)
 {
-	int	descriptor;
+	int		fd;
+	char	*line;
 
-	descriptor = open("test.txt", O_RDWR);
-	printf("%s", fill_line(descriptor));
+	fd = open("test.txt", O_RDONLY);
+	// fd = 0; // To test stdin
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("Linha: %s", line);
+		free(line);
+		// printf("%s\n", line); // To test other character
+	}
+	close(fd);
+	return (0);
 }
