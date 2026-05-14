@@ -6,35 +6,37 @@
 /*   By: jastolfi <jastolfi@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 17:45:01 by jastolfi          #+#    #+#             */
-/*   Updated: 2026/05/14 12:47:15 by jastolfi         ###   ########.fr       */
+/*   Updated: 2026/05/14 15:15:26 by jastolfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
+# include <stdio.h>
 char	*fill_line(int descriptor)
 {
 	static char		*line;
 	int				bytes_read;
-	char			buffer[BUFFER_SIZE + 1];
+	char			*buffer;
 	char			*final;
 
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (NULL);
 	while (!ft_strchr(line, '\n'))
 	{
 		bytes_read = read(descriptor, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
-			return (free(line), line = NULL, NULL);
+			return (free(buffer), free(line), line = NULL, NULL);
 		if (bytes_read == 0)
 		{
 			if (!line || !*line)
-				return (free(line), line = NULL, NULL);
-			final = line;
-			line = NULL;
-			return (final);
+				return (free(buffer), free(line), line = NULL, NULL);
+			return (final = line, line = NULL, free(buffer), final);
 		}
 		buffer[bytes_read] = '\0';
 		line = ft_strjoin(line, buffer);
 	}
+	free(buffer);
 	return (set_line(&line));
 }
 
@@ -58,29 +60,26 @@ char	*set_line(char **string)
 
 char	*get_next_line(int fd)
 {
-	if (BUFFER_SIZE <= 0 || !fd)
+	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
 	return (fill_line(fd));
 }
 
-// # include <stdio.h>
 
-/* int	main(void)
+
+int	main(void)
 {
 	int		fd;
 	char	*line;
 
 	fd = open("test.txt", O_RDONLY);
-	// fd = 0; // To test stdin
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("Linha: %s", line);
-		free(line);
-		// printf("%s\n", line); // To test other character
-	}
+	line = get_next_line(fd);
+	printf("Linha: %s", line);
+	free(line);
+	// printf("%s\n", line); // To test other character
 	close(fd);
 	return (0);
-} */
+}
 
 /* int main(int argc, char **argv)
 {

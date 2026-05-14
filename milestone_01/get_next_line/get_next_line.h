@@ -6,7 +6,7 @@
 /*   By: jastolfi <jastolfi@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 17:45:03 by jastolfi          #+#    #+#             */
-/*   Updated: 2026/05/11 17:52:58 by jastolfi         ###   ########.fr       */
+/*   Updated: 2026/05/14 15:38:16 by jastolfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 2048
+#  define BUFFER_SIZE 100000000
 # endif
 
 # include <unistd.h>
