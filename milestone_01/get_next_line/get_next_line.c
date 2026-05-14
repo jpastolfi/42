@@ -58,7 +58,7 @@ char	*set_line(char **string)
 
 char	*get_next_line(int fd)
 {
-	if (BUFFER_SIZE <= 0)
+	if (BUFFER_SIZE <= 0 || !fd)
     	return (NULL);
 	return (fill_line(fd));
 }
@@ -85,7 +85,6 @@ int main(int argc, char **argv)
 {
     int   fd;
     char  *line;
-    int   line_num = 0;
 
     if (argc != 2)
     {
@@ -100,10 +99,7 @@ int main(int argc, char **argv)
     }
     while ((line = get_next_line(fd)) != NULL)
     {
-        line_num++;
-        printf("Line %d: [%s]", line_num, line);
-        if (line[ft_strlen(line) - 1] != '\n')
-            printf("(no trailing newline)");
+        printf("[%s]", line);
         printf("\n");
         free(line);
     }

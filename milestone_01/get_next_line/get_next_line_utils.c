@@ -62,31 +62,27 @@ char	*ft_strdup(const char *s)
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		index;
-	int		total_len;
+	int		s1_index;
+	int		s2_index;
 	char	*result;
 	char	*to_free;
 
 	to_free = (char *)s1;
 	if (!s1)
 		s1 = "";
-	total_len = ft_strlen(s1) + ft_strlen(s2);
-	result = malloc(total_len + 1);
+	result = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!result)
-		return (NULL);
-	index = 0;
-	while (s1[index])
+		return (free(to_free), NULL);
+	s1_index = 0;
+	while (s1[s1_index])
 	{
-		result[index] = s1[index];
-		index++;
+		result[s1_index] = s1[s1_index];
+		s1_index++;
 	}
-	index = 0;
-	while (s2[index])
-	{
-		result[ft_strlen(s1) + index] = s2[index];
-		index++;
-	}
-	result[total_len] = '\0';
+	s2_index = 0;
+	while (s2[s2_index])
+		result[s1_index++] = s2[s2_index++];
+	result[s1_index] = '\0';
 	free(to_free);
 	return (result);
 }
@@ -127,4 +123,15 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	subs[index] = '\0';
 	return (subs);
+}
+
+#include <stdio.h>
+int main(void)
+{
+	int *x;
+	x = malloc(sizeof(int));
+	*x = 42;
+	printf("%p\n", x);
+	free(x);
+	printf("%p\n", x);
 }
