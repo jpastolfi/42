@@ -6,7 +6,7 @@
 /*   By: jastolfi <jastolfi@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 17:45:01 by jastolfi          #+#    #+#             */
-/*   Updated: 2026/05/12 12:24:27 by jastolfi         ###   ########.fr       */
+/*   Updated: 2026/05/14 12:47:15 by jastolfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,12 @@ char	*set_line(char **string)
 char	*get_next_line(int fd)
 {
 	if (BUFFER_SIZE <= 0 || !fd)
-    	return (NULL);
+		return (NULL);
 	return (fill_line(fd));
 }
 
-# include <stdio.h>
+// # include <stdio.h>
+
 /* int	main(void)
 {
 	int		fd;
@@ -81,28 +82,28 @@ char	*get_next_line(int fd)
 	return (0);
 } */
 
-int main(int argc, char **argv)
+/* int main(int argc, char **argv)
 {
-    int   fd;
-    char  *line;
+	int   fd;
+	char  *line;
 
-    if (argc != 2)
-    {
-        printf("Usage: %s <filename>\n", argv[0]);
-        return (1);
-    }
-    fd = open(argv[1], O_RDONLY);
-    if (fd < 0)
-    {
-        printf("Could not open %s\n", argv[1]);
-        return (1);
-    }
-    while ((line = get_next_line(fd)) != NULL)
-    {
-        printf("[%s]", line);
-        printf("\n");
-        free(line);
-    }
-    close(fd);
-    return (0);
-}
+	if (argc != 2)
+	{
+		printf("Usage: %s <filename>\n", argv[0]);
+		return (1);
+	}
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+	{
+		printf("Could not open %s\n", argv[1]);
+		return (1);
+	}
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("[%s]", line);
+		printf("\n");
+		free(line);
+	}
+	close(fd);
+	return (0);
+} */

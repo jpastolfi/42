@@ -6,7 +6,7 @@
 /*   By: jastolfi <jastolfi@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/11 17:44:57 by jastolfi          #+#    #+#             */
-/*   Updated: 2026/05/11 17:53:16 by jastolfi         ###   ########.fr       */
+/*   Updated: 2026/05/14 12:56:48 by jastolfi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,15 +123,4 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	subs[index] = '\0';
 	return (subs);
-}
-
-#include <stdio.h>
-int main(void)
-{
-	int *x;
-	x = malloc(sizeof(int));
-	*x = 42;
-	printf("%p\n", x);
-	free(x);
-	printf("%p\n", x);
 }
