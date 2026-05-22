@@ -4,6 +4,7 @@ def ft_count_harvest_recursive() -> None:
         return
     recursive_print(days_until)
 
+
 def recursive_print(days_until: int) -> None:
     if days_until == 0:
         print("Harvest time!")
