@@ -2,5 +2,8 @@
 
 *.pdf
 *.out
+a.out.dSYM/
 *.txt
 *.DS_Store
+__pycache__
+*/main.py

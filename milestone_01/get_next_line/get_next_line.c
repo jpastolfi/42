@@ -29,9 +29,10 @@ char	*fill_line(int descriptor)
 			return (free(buffer), free(line), line = NULL, NULL);
 		if (bytes_read == 0)
 		{
+			free(buffer);
 			if (!line || !*line)
-				return (free(buffer), free(line), line = NULL, NULL);
-			return (final = line, line = NULL, free(buffer), final);
+				return (free(line), line = NULL, NULL);
+			return (final = line, line = NULL, final);
 		}
 		buffer[bytes_read] = '\0';
 		line = ft_strjoin(line, buffer);
@@ -65,23 +66,7 @@ char	*get_next_line(int fd)
 	return (fill_line(fd));
 }
 
-
-
-int	main(void)
-{
-	int		fd;
-	char	*line;
-
-	fd = open("test.txt", O_RDONLY);
-	line = get_next_line(fd);
-	printf("Linha: %s", line);
-	free(line);
-	// printf("%s\n", line); // To test other character
-	close(fd);
-	return (0);
-}
-
-/* int main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	int   fd;
 	char  *line;
@@ -105,4 +90,4 @@ int	main(void)
 	}
 	close(fd);
 	return (0);
-} */
+}
