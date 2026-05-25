@@ -3,7 +3,7 @@ def ft_garden_intro():
 Plant: Rose
 Height: 25cm
 Age: 30 days
-          
+
 === End of Program ===""")
 
 

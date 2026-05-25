@@ -1,19 +1,19 @@
 class Plant:
-    def __init__(self, name, height, age_days):
+    def __init__(self, name: str, height: int, age_days: int):
         self.name = name
-        self.height = height
+        self.height = round(height, ndigits=4)
         self.age_days = age_days
-    
+
     def show(self):
-        print("{}: {}cm, {} days old".format(self.name, self.height, self.age_days))
+        print("{}: {:.1f}cm, {} days old"
+              .format(self.name, self.height, self.age_days))
+
 
 def ft_garden_data():
-    plant_one = Plant("Rose", "25", "30")
-    plant_two = Plant("Sunflower", "80", "45")
-    plant_three = Plant("Cactus", "15", "120")
     print("=== Garden Plant Registry ===")
-    plant_one.show()
-    plant_two.show()
-    plant_three.show()
-
-ft_garden_data()
+    plant = Plant("Rose", 25, 30)
+    plant.show()
+    plant = Plant("Sunflower", 80, 45)
+    plant.show()
+    plant = Plant("Cactus", 15, 120)
+    plant.show()
