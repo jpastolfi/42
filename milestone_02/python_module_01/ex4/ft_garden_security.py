@@ -74,3 +74,7 @@ def ft_garden_security():
     plant.set_age_days(150)
     plant.set_age_days(-150)
     plant.show()
+
+
+if __name__ == "__main__":
+    ft_garden_security()

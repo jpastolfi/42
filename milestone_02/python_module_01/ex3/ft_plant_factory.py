@@ -31,3 +31,7 @@ def ft_plant_factory() -> None:
     Plant("Cactus", 5.0, 90)
     Plant("Sunflower", 80.0, 45)
     Plant("Fern", 15.0, 120)
+
+
+if __name__ == "__main__":
+    ft_plant_factory()

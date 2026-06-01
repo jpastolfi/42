@@ -28,3 +28,7 @@ def ft_plant_growth() -> None:
     plant = Plant("Rose", 25, 30)
     plant.show()
     plant.grow()
+
+
+if __name__ == "__main__":
+    ft_plant_growth()

@@ -17,3 +17,7 @@ def ft_garden_data() -> None:
     plant.show()
     plant = Plant("Cactus", 15, 120)
     plant.show()
+
+
+if (__name__ == "__main__"):
+    ft_garden_data()
