@@ -25,6 +25,8 @@ def test_error_types(operation_number: int) -> None:
         print("Caught FileNotFoundError: [Errno 2] No such file or directory")
     except TypeError:
         print("Caught TypeError: can only concatenate str to str")
+    except Exception:
+        print("You're not supposed to be here")
     print("Still running")
 
 
