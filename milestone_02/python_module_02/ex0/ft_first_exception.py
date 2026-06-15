@@ -1,6 +1,7 @@
 def input_temperature(temp_str: str) -> int:
     return int(temp_str)
 
+
 def test_temperature() -> None:
     try:
         print("{} degrees looks good to me".format(input_temperature("25")))

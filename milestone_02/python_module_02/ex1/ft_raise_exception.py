@@ -4,6 +4,7 @@ def input_temperature(temp_str: str) -> int:
     else:
         raise Exception
 
+
 def test_temperature() -> None:
     try:
         print("{} degrees looks good to me".format(input_temperature("-50")))

@@ -12,33 +12,23 @@ def garden_operations(operation_number: int) -> None:
         case _:
             print("Operation completed successfully")
 
+
 def test_error_types(operation_number: int) -> None:
     print("=== Garden Error Types Demo ===")
     try:
         garden_operations(operation_number)
     except ValueError:
-        print("Caught ValueError: invalid literal for int() with base 10: 'abc'")
+        print("Caught ValueError: invalid literal for int() w/ base 10: 'abc'")
     except ZeroDivisionError:
         print("Caught ZeroDivisionError: division by zero")
     except FileNotFoundError:
         print("Caught FileNotFoundError: [Errno 2] No such file or directory")
     except TypeError:
-        print("Caught TypeError: can only concatenate str (not \"int\") to str")        
+        print("Caught TypeError: can only concatenate str to str")
+    print("Still running")
 
 
 if (__name__ == "__main__"):
     for i in range(0, 5):
         test_error_types(i)
-
-
-
-"""
-
-
-
-
-
-
-Operation completed successfully
-All error types tested successfully!
-"""
+    print("All error types tested successfully!")
