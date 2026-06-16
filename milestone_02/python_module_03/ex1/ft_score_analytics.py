@@ -1,9 +1,11 @@
 import sys
 
+
 class NotEnoughArgumentsException(Exception):
     def __init__(self, message: str = "Not enough arguments") -> None:
         super().__init__(message)
         self.message = message
+
 
 if (__name__ == "__main__"):
     print("=== Player Score Analytics ===")
@@ -24,5 +26,5 @@ if (__name__ == "__main__"):
         print("Low score: {}".format(min(storage)))
         print("Score range: {}".format(max(storage) - min(storage)))
     except NotEnoughArgumentsException:
-            print("No scores provided. Usage: python3 ft_score_analytics.py <score1> <score2> ...")
-    
+        print("No scores provided.")
+        print("Usage: python3 ft_score_analytics.py <score1> <score2> ...")
