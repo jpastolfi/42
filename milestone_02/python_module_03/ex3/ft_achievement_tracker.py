@@ -1,7 +1,7 @@
 import random
 
 def gen_player_achievements(my_list: list[str]) -> set[str]:
-    return set(random.choices(my_list, k=3))
+    return set(random.sample(my_list, k=random.randint(1, len(my_list))))
 
 
 if __name__ == "__main__":
@@ -22,10 +22,8 @@ if __name__ == "__main__":
             "Dylan": gen_player_achievements(my_list)
         }
     
-    # Track unique achievements among all the players
     distinct: set[str] = set()
-    shared: set[str] = players["Alice"]
-    unique: set[str] = set()
+    shared: set[str] = set(players["Alice"])
 
     print("=== Achievement Tracker System ===", end="\n\n")
     
