@@ -1,30 +1,61 @@
 import random
 
-class Achievement:
-    def __init__(self, achievement: str) -> None:
-        self.achievement = achievement
-    
-    def __str__(self) -> str:
-        return self.achievement
-
-
-class Player:
-    def __init__(self, name: str) -> None:
-        self.name = name
-        self.achievements: set[Achievement] | None = None
-
-
-def gen_player_achievements():
-    my_list: list[str] = ["Strategist", "Runner", "Survivor",
-                          "Hunter", "Unstoppable", "Path Finder",
-                          "First Steps", "Sharp Mind", "Boss Slayer",
-                          "Crafting Genius", "World Savior", "Explorer",
-                          "Collector Supreme"]
-    player = Player("Miguel")
-    player.achievements = set(Achievement(item) for item in random.choices(my_list, k=3))
-    for item in player.achievements:
-        print(item)
+def gen_player_achievements(my_list: list[str]) -> set[str]:
+    return set(random.choices(my_list, k=3))
 
 
 if __name__ == "__main__":
-    gen_player_achievements()
+    my_list: list[str] = ["Strategist", "Runner", "Survivor",
+                       "Hunter", "Unstoppable", "Path Finder",
+                       "First Steps", "Sharp Mind", "Boss Slayer",
+                       "Crafting Genius", "World Savior", "Explorer",
+                       "Collector Supreme",
+                       "Shadow Walker", "Iron Will", "Lone Wolf",
+                       "Trailblazer", "Ghost", "Silent Assassin",
+                       "Mastermind", "Last Stand", "Legend",
+                       "Dark Horse", "Overlord", "Wanderer"]
+
+    players: dict[str, set[str]] = {
+            "Alice": gen_player_achievements(my_list),
+            "Bob": gen_player_achievements(my_list),
+            "Charlie": gen_player_achievements(my_list),
+            "Dylan": gen_player_achievements(my_list)
+        }
+    
+    # Track unique achievements among all the players
+    distinct: set[str] = set()
+    shared: set[str] = players["Alice"]
+    unique: set[str] = set()
+
+    print("=== Achievement Tracker System ===", end="\n\n")
+    
+    for player_name in players:
+        print("Player {}: {}".format(
+            player_name,
+            players[player_name]
+        ))
+        distinct |= players[player_name]
+
+        
+    # Track unique achievements among all the players
+    print("All distinct achievements: {}"
+          .format(distinct), end="\n\n")
+    
+    # Find achievements shared by all players
+    for player_name in players:
+        shared &= players[player_name]
+    print("Common achievements: {}".format(shared), end="\n\n")
+
+    # For each player, spot the achievements no one else has
+    for name, ach in players.items():
+        temp:set[str] = set()
+        for name_in, ach_in in players.items():
+            if (name == name_in):
+                continue
+            temp |= ach_in
+        print("Only {} has: {}".format(name, ach - temp), end="\n\n")
+
+    # For each player, list the missing achievements to have them all
+    for player in players:
+        print("{} is missing: {}". format(player, set(my_list) - players[player]))
+    
