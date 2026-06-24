@@ -16,11 +16,17 @@ if __name__ == "__main__":
             print(content)
             print("---")
         except FileNotFoundError as e:
-            print("Error opening file '{}': {}".format(file_name, e))
+            sys.stderr.write(
+                "[STDERR] Error opening file '{}': {}".format(file_name, e)
+                )
         except PermissionError as e:
-            print("Error opening file '{}': {}".format(file_name, e))
+            sys.stderr.write(
+                "[STDERR] Error opening file '{}': {}".format(file_name, e)
+                )
         except Exception as e:
-            print("Error opening file '{}': {}".format(file_name, e))
+            sys.stderr.write(
+                "[STDERR] Error opening file '{}': {}".format(file_name, e)
+                )
         finally:
             if file is not None:
                 file.close()
@@ -28,37 +34,36 @@ if __name__ == "__main__":
 
         if file is not None:
             try:
+                i: int = 0
                 file = None
                 file = open(file_name, 'r+')
                 lines: list[str] = list()
                 print("Transform data:")
                 print("---")
-                for line in file.readlines():
-                    if line.endswith("\n"):
-                        lines.append(line.rstrip() + "#\n")
-                    else:
-                        lines.append(line.rstrip() + "#")
+                lines = file.read().split("\n")
                 for line in lines:
-                    print(line, end="")
-                print("\n---")
-                new_file_name = sys.stdin.readline().rstrip()
-                if (new_file_name == file_name):
-                    file.seek(0)
-                    file.truncate()
-                    file.writelines(lines)
-                elif new_file_name == "":
+                    print(line + "#")
+                print("---")
+                print("Enter new file name (or empty): ", end="")
+                sys.stdout.flush()
+                new_file_name = sys.stdin.readline().strip()
+                if new_file_name == "":
                     print("Not saving data")
                 else:
                     file.close()
                     file = open(new_file_name, 'w')
-                    file.writelines(lines)
+                    for line in lines:
+                        file.write(line + "#")
+                        i += 1
+                        if len(lines) != i:
+                            file.write("\n")
+
             except Exception as e:
-                print("Error opening file '{}': {}".format(file_name, e))
+                sys.stderr.write(
+                    "[STDERR] Error opening file '{}': {}".format(file_name, e)
+                    )
             finally:
                 if file is not None:
                     file.close()
                 if new_file_name != "":
                     print("Data saved in file '{}'.".format(new_file_name))
-
-if __name__ == "__main__":
-    ...
