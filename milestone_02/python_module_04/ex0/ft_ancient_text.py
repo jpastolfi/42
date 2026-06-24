@@ -5,6 +5,7 @@ if __name__ == "__main__":
         print("Usage: ft_ancient_text.py <file>")
     else:
         file_name = sys.argv[1]
+        file = None
         try:
             print("=== Cyber Archives Recovery ===")
             print("Accessing file '{}'".format(file_name))
@@ -17,6 +18,9 @@ if __name__ == "__main__":
             print("Error opening file '{}': {}".format(file_name, e))
         except PermissionError as e:
             print("Error opening file '{}': {}".format(file_name, e))
+        except Exception as e:
+            print("Error opening file '{}': {}".format(file_name, e))
         finally:
-            file.close()
-            print("File '{}' closed.".format(file_name))
+            if file is not None:
+                file.close()
+                print("File '{}' closed.".format(file_name))
