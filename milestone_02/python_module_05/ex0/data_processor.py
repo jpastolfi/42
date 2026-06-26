@@ -1,105 +1,216 @@
-import typing
+from typing import Any
 from abc import ABC, abstractmethod
 
-# ingest will process input data
-# output will output ingested data
-
-""" The validate method will be defined as validate(self, data: Any) -> bool
-in the DataProcessor class. The overriding methods in the specialized classes will
-share the same signature, as they cannot know what data will be sent and must accept any type. This method returns a bool that indicates if the provided data
-can be ingested by this data processor. """
-
-""" The ingest method will be defined as ingest(self, data: Any) -> None in the
-DataProcessor class. The overriding methods in the specialized classes will have
-their own specific signatures to match the types they expect. In case the user
-does not validate the data before calling ingest, and provides invalid data, an
-exception must be raised. """
 
 class NotValidatedData(Exception):
-    def init(self, message: str):
-        super().message = message
-        self.message = message
+    ...
+
 
 class DataProcessor(ABC):
     def __init__(self):
-        self.data_list = []
+        self.validated_data = []
+        self.processed_data = []
+        self.current_item = -1
 
     @abstractmethod
-    def validate(self, data: any) -> bool:
+    def validate(self, data: Any) -> bool:
         ...
 
     @abstractmethod
-    def ingest(self, data: any) -> None:
+    def ingest(self, data: Any) -> None:
         ...
 
-    def output(self, amount: int) -> tuple[int, str]:
-        if (amount > len(self.data_list)):
-            print("Out of bounds")
-            return
-        print("Extracting {} value{}..."
-            .format(amount, "s" if amount > 1 else ""))
-        for i in range(amount):
-            print("Value {}: {}".format(i, self.data_list.pop(0)))
-        print("Remaining: {}".format(self.data_list))
+    def output(self) -> tuple[int, str]:
+        self.current_item += 1
+        return (self.current_item, self.processed_data.pop(0))
+
 
 class NumericProcessor(DataProcessor):
-    def validate(self, data: any) -> bool:
+    def validate(self, data: Any) -> bool:
+        is_valid: bool
         if isinstance(data, list):
             for item in data:
-                print("Trying to validate input '{}': {}"
-                    .format(item, isinstance(item, int | float)))
-                if not isinstance(item, int | float):
-                    self.data.remove(item)
+                print("Trying to validate input '{}':".format(item), end="")
+                if isinstance(item, int | float):
+                    self.validated_data.append(item)
+                    is_valid = True
+                else:
+                    is_valid = False
+                print(is_valid)
         else:
-            print("Trying to validate input '{}': {}"
-                    .format(data, isinstance(data, int | float)))
+            print("Trying to validate input '{}':".format(data), end="")
+            if isinstance(data, int | float):
+                self.validated_data.append(data)
+                is_valid = True
+            else:
+                is_valid = False
+            print(is_valid)
+        return (is_valid)
 
     def ingest(self, data: int | float | list[int | float]) -> None:
-        if isinstance(data, list):
-            for item in data:
-                if not isinstance(item, int | float):
-                    print("Got exception: Improper numeric data")
-                else:
-                    item = str(item)
-        else:
-            if not isinstance(data, int | float):
-                    print("Got exception: Improper numeric data")
+        try:
+            if isinstance(data, list):
+                for item in data:
+                    if not isinstance(item, int | float):
+                        raise NotValidatedData("Improper numeric data")
+                    else:
+                        self.processed_data.append(str(item))
             else:
-                data = str(data)
+                if not isinstance(data, int | float):
+                    raise NotValidatedData("Improper numeric data")
+                else:
+                    self.processed_data.append(str(data))
+        except NotValidatedData as e:
+            print("Got exception: {}".format(e))
+        print("Processing data: {}".format(self.processed_data))
 
 
 class TextProcessor(DataProcessor):
-    def validate(self, data: any) -> bool:
+    def validate(self, data: Any) -> bool:
+        is_valid: bool
         if isinstance(data, list):
-            print("List")
+            for item in data:
+                print("Trying to validate input '{}':".format(item), end="")
+                if isinstance(item, str):
+                    self.validated_data.append(item)
+                    is_valid = True
+                else:
+                    is_valid = False
+                print(is_valid)
         else:
-            print("Not list")
+            print("Trying to validate input '{}':".format(data), end="")
+            if isinstance(data, str):
+                self.validated_data.append(data)
+                is_valid = True
+            else:
+                is_valid = False
+            print(is_valid)
+        return (is_valid)
 
     def ingest(self, data: str | list[str]) -> None:
-        if isinstance(data, list):
-            print("List")
-        else:
-            print("Not list")
+        try:
+            if isinstance(data, list):
+                for item in data:
+                    if not isinstance(item, str):
+                        raise NotValidatedData("Improper string data")
+                    else:
+                        self.processed_data.append(item)
+            else:
+                if not isinstance(data, str):
+                    raise NotValidatedData("Improper string data")
+                else:
+                    self.processed_data.append(data)
+        except NotValidatedData as e:
+            print("Got exception: {}".format(e))
+        print("Processing data: {}".format(self.processed_data))
 
 
 class LogProcessor(DataProcessor):
-    def validate(self, data: any) -> bool:
+    def validate(self, data: Any) -> bool:
+        is_valid: bool
         if isinstance(data, list):
-            print("List")
+            for item in data:
+                print("Trying to validate input '{}':".format(item), end="")
+                if (isinstance(item, dict)):
+                    for unit in list(item.items()):
+                        k, v = unit
+                        if isinstance(k, str) and isinstance(v, str):
+                            self.validated_data.append(item)
+                            is_valid = True
+                        else:
+                            is_valid = False
+                        print(is_valid)
+                else:
+                    is_valid = False
         else:
-            print("Not list")
+            print("Trying to validate input '{}':".format(data), end="")
+            if (isinstance(data, dict)):
+                for unit in list(data.items()):
+                    k, v = unit
+                    if isinstance(k, str) and isinstance(v, str):
+                        self.validated_data.append(data)
+                        is_valid = True
+                    else:
+                        is_valid = False
+                    print(is_valid)
+            else:
+                is_valid = False
+        return is_valid
 
-    def ingest(self, data: dict[str: str] | list[dict[str: str]]) -> None:
-        if isinstance(data, list):
-            print("List")
-        else:
-            print("Not list")
+    def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
+        try:
+            if isinstance(data, list):
+                for item in data:
+                    if not isinstance(item, dict):
+                        raise NotValidatedData("Improper dictionary")
+                    else:
+                        for unit in list(item.items()):
+                            k, v = unit
+                            if (not isinstance(k, str)
+                                    or not isinstance(v, str)):
+                                raise NotValidatedData("Improper dictionary")
+                        self.processed_data.append(str(item))
+            else:
+                if (isinstance(data, dict)):
+                    for unit in list(data.items()):
+                        k, value = unit
+                        if (not isinstance(k, str)
+                                or not isinstance(value, str)):
+                            raise NotValidatedData("Improper dictionary")
+                        else:
+                            self.processed_data.append(str(data))
+                else:
+                    raise NotValidatedData("Improper dictionary")
+        except NotValidatedData as e:
+            print("Got exception: {}".format(e))
+        print("Processing data: {}".format(self.processed_data))
+
 
 if __name__ == "__main__":
     print("=== Code Nexus - Data Processor ===")
     numericProcessor = NumericProcessor()
-    textProcessor = TextProcessor()
-    logProcessor = LogProcessor()
-    numericProcessor.validate(1)
     numericProcessor.validate([1, 2, 3, "a"])
-    print(numericProcessor.data_list)
+    numericProcessor.validate(4)
+    numericProcessor.ingest([1, 2, 3, "a"])
+    numericProcessor.ingest(4)
+    while numericProcessor.processed_data:
+        index, value = numericProcessor.output()
+        print("Numeric value {}: {}".format(index, value))
+
+    textProcessor = TextProcessor()
+    textProcessor.validate(["a", "b", "c"])
+    textProcessor.validate("d")
+    textProcessor.ingest(["a", "b", "c"])
+    textProcessor.ingest("d")
+    while textProcessor.processed_data:
+        index, value = textProcessor.output()
+        print("Text value {}: {}".format(index, value))
+
+    logProcessor = LogProcessor()
+    logProcessor.validate([
+     {"test1": "teste1"},
+     {"test2": "teste2"},
+     {"test3": "teste3"},
+    ])
+    logProcessor.validate({
+        "test4": "teste4"
+    })
+    logProcessor.validate({
+        "test5": 5
+    })
+    logProcessor.ingest([
+     {"test1": "teste1"},
+     {"test2": "teste2"},
+     {
+        "test3": "teste3",
+        "test4": "teste4"
+        }])
+    logProcessor.ingest({
+        "test5": "teste5"
+    })
+    logProcessor.ingest({
+        "test6": 5
+    })
+    while logProcessor.processed_data:
+        index, value = logProcessor.output()
+        print("Log entry {}: {}".format(index, value))
