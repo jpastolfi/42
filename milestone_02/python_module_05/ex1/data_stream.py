@@ -168,9 +168,10 @@ class LogProcessor(DataProcessor):
 
 class DataStream():
     def __init__(self):
-        self.numericProcessor = None
+        self.processor = []
+        """ self.numericProcessor = None
         self.textProcessor = None
-        self.logProcessor = None
+        self.logProcessor = None """
 
     def register_processor(self, proc: DataProcessor) -> None:
         if (isinstance(proc, NumericProcessor)):
@@ -191,7 +192,8 @@ class DataStream():
     def process_stream(self, stream: list[Any]) -> None:
         print("Send batch of data on stream: {}".format(stream))
         for item in stream:
-            if isinstance(item, int | float | list[int | float]):
+            print(item)
+            if isinstance(item, int | float) or isinstance(item, list[int]) or isinstance(item, list[float]):
                 if self.numericProcessor:
                     self.numericProcessor.ingest(item)
                 else:
@@ -222,7 +224,7 @@ class DataStream():
 
 
 if __name__ == "__main__":
-    print("=== Code Nexus - Data Processor ===")
+    print("=== Code Nexus - Data Stream ===")
     data_stream = DataStream()
     numeric_processor = NumericProcessor()
     text_processor = TextProcessor()
@@ -230,3 +232,5 @@ if __name__ == "__main__":
     data_stream.register_processor(numeric_processor)
     data_stream.register_processor(text_processor)
     data_stream.register_processor(log_processor)
+
+    data_stream.process_stream([1, 2, 3, "a", 4, 5, {"a": "b"}, [1, 2, 3]])
