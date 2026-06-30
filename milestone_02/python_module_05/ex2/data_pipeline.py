@@ -65,7 +65,6 @@ class NumericProcessor(DataProcessor):
     def __str__(self):
         return "NumericProcessor"
 
-
 class TextProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
         is_valid: bool
@@ -171,11 +170,13 @@ class LogProcessor(DataProcessor):
     def __str__(self):
         return "LogProcessor"
 
+class ExportPlugin(Protocol):
+    def process_output(self, data: list[tuple[int, str]]) -> None:
+        ...
 
 class DataStream():
     def __init__(self):
         self.processor_list = []
-
 
     def register_processor(self, proc: DataProcessor) -> None:
         if (isinstance(proc, NumericProcessor)):
@@ -208,8 +209,6 @@ class DataStream():
         except Exception as e:
             print("Got exception: {}".format(e))
 
-
-
     def print_processors_stats(self) -> None:
         for processor in self.processor_list:
             print("{} has {} items to process.".format(processor, processor.count))
@@ -221,6 +220,9 @@ class DataStream():
                         "items" if processor.count - processor.current_item > 1 else "item"
                         ))
                 print("Value {}: {}".format(index, value))
+
+    def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
+        ...
 
 
 if __name__ == "__main__":
