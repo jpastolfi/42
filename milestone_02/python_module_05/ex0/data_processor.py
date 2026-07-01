@@ -8,7 +8,6 @@ class NotValidatedData(Exception):
 
 class DataProcessor(ABC):
     def __init__(self):
-        self.validated_data = []
         self.processed_data = []
         self.current_item = -1
 
@@ -27,150 +26,91 @@ class DataProcessor(ABC):
 
 class NumericProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
-        is_valid: bool
         if isinstance(data, list):
             for item in data:
-                print("Trying to validate input '{}':".format(item), end="")
-                if isinstance(item, int | float):
-                    self.validated_data.append(item)
-                    is_valid = True
-                else:
-                    is_valid = False
-                print(is_valid)
+                if not isinstance(item, int | float):
+                    return False
+            return True
         else:
-            print("Trying to validate input '{}':".format(data), end="")
-            if isinstance(data, int | float):
-                self.validated_data.append(data)
-                is_valid = True
-            else:
-                is_valid = False
-            print(is_valid)
-        return (is_valid)
+            if not isinstance(data, int | float):
+                return False
+            return True
 
     def ingest(self, data: int | float | list[int | float]) -> None:
         try:
+            if not self.validate(data):
+                raise NotValidatedData("Improper numeric data")
             if isinstance(data, list):
                 for item in data:
-                    if not isinstance(item, int | float):
-                        raise NotValidatedData("Improper numeric data")
-                    else:
-                        self.processed_data.append(str(item))
+                    self.processed_data.append(str(item))
             else:
-                if not isinstance(data, int | float):
-                    raise NotValidatedData("Improper numeric data")
-                else:
-                    self.processed_data.append(str(data))
+                self.processed_data.append(str(data))
         except NotValidatedData as e:
             print("Got exception: {}".format(e))
-        print("Processing data: {}".format(self.processed_data))
 
 
 class TextProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
-        is_valid: bool
         if isinstance(data, list):
             for item in data:
-                print("Trying to validate input '{}':".format(item), end="")
-                if isinstance(item, str):
-                    self.validated_data.append(item)
-                    is_valid = True
-                else:
-                    is_valid = False
-                print(is_valid)
+                if not isinstance(item, str):
+                    return False
+            return True
         else:
-            print("Trying to validate input '{}':".format(data), end="")
-            if isinstance(data, str):
-                self.validated_data.append(data)
-                is_valid = True
-            else:
-                is_valid = False
-            print(is_valid)
-        return (is_valid)
+            if not isinstance(data, str):
+                return False
+            return True
 
     def ingest(self, data: str | list[str]) -> None:
         try:
+            if not self.validate(data):
+                raise NotValidatedData("Improper text data")
             if isinstance(data, list):
                 for item in data:
-                    if not isinstance(item, str):
-                        raise NotValidatedData("Improper string data")
-                    else:
-                        self.processed_data.append(item)
+                    self.processed_data.append(item)
             else:
-                if not isinstance(data, str):
-                    raise NotValidatedData("Improper string data")
-                else:
-                    self.processed_data.append(data)
+                self.processed_data.append(data)
         except NotValidatedData as e:
             print("Got exception: {}".format(e))
-        print("Processing data: {}".format(self.processed_data))
 
 
 class LogProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
-        is_valid: bool
         if isinstance(data, list):
             for item in data:
-                print("Trying to validate input '{}':".format(item), end="")
-                if (isinstance(item, dict)):
-                    for unit in list(item.items()):
-                        k, v = unit
-                        if isinstance(k, str) and isinstance(v, str):
-                            self.validated_data.append(item)
-                            is_valid = True
-                        else:
-                            is_valid = False
-                        print(is_valid)
-                else:
-                    is_valid = False
+                if not isinstance(item, dict):
+                    return False
+                for unit in list(item.items()):
+                    key, value = unit
+                    if not isinstance(key, str) or not isinstance(value, str):
+                        return False
+            return True
         else:
-            print("Trying to validate input '{}':".format(data), end="")
-            if (isinstance(data, dict)):
-                for unit in list(data.items()):
-                    k, v = unit
-                    if isinstance(k, str) and isinstance(v, str):
-                        self.validated_data.append(data)
-                        is_valid = True
-                    else:
-                        is_valid = False
-                    print(is_valid)
-            else:
-                is_valid = False
-        return is_valid
+            if not isinstance(data, dict):
+                return False
+            for unit in list(data.items()):
+                key, value = unit
+                if not isinstance(key, str) or not isinstance(value, str):
+                    return False
+            return True
 
     def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         try:
+            if not self.validate(data):
+                raise NotValidatedData("Impromer dictionary data")
             if isinstance(data, list):
                 for item in data:
-                    if not isinstance(item, dict):
-                        raise NotValidatedData("Improper dictionary")
-                    else:
-                        for unit in list(item.items()):
-                            k, v = unit
-                            if (not isinstance(k, str)
-                                    or not isinstance(v, str)):
-                                raise NotValidatedData("Improper dictionary")
-                        self.processed_data.append(str(item))
+                    self.processed_data.append(": ".join(item.values()))
             else:
-                if (isinstance(data, dict)):
-                    for unit in list(data.items()):
-                        k, value = unit
-                        if (not isinstance(k, str)
-                                or not isinstance(value, str)):
-                            raise NotValidatedData("Improper dictionary")
-                        else:
-                            self.processed_data.append(str(data))
-                else:
-                    raise NotValidatedData("Improper dictionary")
+                self.processed_data.append(":".join(data.values()))
         except NotValidatedData as e:
             print("Got exception: {}".format(e))
-        print("Processing data: {}".format(self.processed_data))
 
 
 if __name__ == "__main__":
     print("=== Code Nexus - Data Processor ===")
     numericProcessor = NumericProcessor()
-    numericProcessor.validate([1, 2, 3, "a"])
-    numericProcessor.validate(4)
+    numericProcessor.ingest([1, 2, 3])
     numericProcessor.ingest([1, 2, 3, "a"])
     numericProcessor.ingest(4)
     while numericProcessor.processed_data:
@@ -178,9 +118,8 @@ if __name__ == "__main__":
         print("Numeric value {}: {}".format(index, value))
 
     textProcessor = TextProcessor()
-    textProcessor.validate(["a", "b", "c"])
-    textProcessor.validate("d")
     textProcessor.ingest(["a", "b", "c"])
+    textProcessor.ingest(["a", "b", "c", 1])
     textProcessor.ingest("d")
     while textProcessor.processed_data:
         index, value = textProcessor.output()
@@ -204,7 +143,8 @@ if __name__ == "__main__":
      {
         "test3": "teste3",
         "test4": "teste4"
-        }])
+        }
+    ])
     logProcessor.ingest({
         "test5": "teste5"
     })

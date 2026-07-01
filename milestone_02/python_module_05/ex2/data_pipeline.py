@@ -22,9 +22,12 @@ class DataProcessor(ABC):
         ...
 
     def output(self) -> tuple[int, str]:
-        self.current_item += 1
         if (self.processed_data):
+            self.current_item += 1
             return (self.current_item, self.processed_data.pop(0))
+        else:
+            return (-1, "None")
+
 
 class NumericProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
@@ -64,6 +67,7 @@ class NumericProcessor(DataProcessor):
 
     def __str__(self):
         return "NumericProcessor"
+
 
 class TextProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
@@ -106,6 +110,7 @@ class TextProcessor(DataProcessor):
 
     def __str__(self):
         return "TextProcessor"
+
 
 class LogProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
@@ -170,6 +175,7 @@ class LogProcessor(DataProcessor):
     def __str__(self):
         return "LogProcessor"
 
+
 class ExportPlugin(Protocol):
     def process_output(self, data: list[tuple[int, str]]) -> None: ...
 
@@ -180,14 +186,22 @@ class CsvExportPlugin:
         for item in data:
             if item:
                 index, content = item
-                print(content)
                 if index >= 0:
                     treated_data.append(content)
+        print("CSV Output:")
+        print(",".join(treated_data))
 
 
 class JsonExportPlugin:
     def process_output(self, data: list[tuple[int, str]]) -> None:
-        print("json")
+        treated_data = list()
+        for item in data:
+            if item:
+                index, content = item
+                if index >= 0:
+                    treated_data.append(content)
+        print("JSON Output:")
+        print(",".join(treated_data))
 
 
 class DataStream():
@@ -210,7 +224,7 @@ class DataStream():
     def process_stream(self, stream: list[Any]) -> None:
         try:
             print("Send batch of data on stream: {}".format(stream))
-            is_processed:bool = False
+            is_processed: bool = False
             for item in stream:
                 for processor in self.processor_list:
                     if (processor.validate(item)):
@@ -224,13 +238,16 @@ class DataStream():
 
     def print_processors_stats(self) -> None:
         for processor in self.processor_list:
-            print("{} has {} items to process.".format(processor, processor.count))
+            print("{} has {} items to process."
+                  .format(processor, processor.count))
             while processor.processed_data:
                 index, value = processor.output()
                 print("{} {} remaining in processor"
-                    .format(
+                      .format(
                         processor.count - processor.current_item,
-                        "items" if processor.count - processor.current_item > 1 else "item"
+                        "items"
+                        if processor.count - processor.current_item > 1
+                        else "item"
                         ))
                 print("Value {}: {}".format(index, value))
 
@@ -239,7 +256,7 @@ class DataStream():
             lista = []
             for _i in range(nb):
                 lista.append(processor.output())
-            plugin.process_output(self, lista)
+            plugin.process_output(lista)
 
 
 if __name__ == "__main__":
@@ -248,6 +265,8 @@ if __name__ == "__main__":
     numeric_processor = NumericProcessor()
     text_processor = TextProcessor()
     log_processor = LogProcessor()
+    csv_plugin = CsvExportPlugin()
+    json_plugin = JsonExportPlugin()
     data_stream.register_processor(numeric_processor)
     data_stream.register_processor(text_processor)
     data_stream.register_processor(log_processor)
@@ -255,10 +274,10 @@ if __name__ == "__main__":
         'Hello world',
         [3.14, -1, 2.71],
         [
-            {'log_level': 'WARNING', 'log_message': 'Telnet access! Use ssh instead'},
+            {'log_level': 'WARNING', 'log_message': 'Telnet access! Use ssh'},
             {'log_level': 'INFO', 'log_message': 'User wil is connected'}
         ],
         42,
         ['Hi', 'five']
     ])
-    data_stream.output_pipeline(35, CsvExportPlugin)
+    data_stream.output_pipeline(35, csv_plugin)
