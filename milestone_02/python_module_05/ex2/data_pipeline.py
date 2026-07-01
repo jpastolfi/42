@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Protocol
 from abc import ABC, abstractmethod
 
 
@@ -23,8 +23,8 @@ class DataProcessor(ABC):
 
     def output(self) -> tuple[int, str]:
         self.current_item += 1
-        return (self.current_item, self.processed_data.pop(0))
-
+        if (self.processed_data):
+            return (self.current_item, self.processed_data.pop(0))
 
 class NumericProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
@@ -171,8 +171,24 @@ class LogProcessor(DataProcessor):
         return "LogProcessor"
 
 class ExportPlugin(Protocol):
+    def process_output(self, data: list[tuple[int, str]]) -> None: ...
+
+
+class CsvExportPlugin:
     def process_output(self, data: list[tuple[int, str]]) -> None:
-        ...
+        treated_data = list()
+        for item in data:
+            if item:
+                index, content = item
+                print(content)
+                if index >= 0:
+                    treated_data.append(content)
+
+
+class JsonExportPlugin:
+    def process_output(self, data: list[tuple[int, str]]) -> None:
+        print("json")
+
 
 class DataStream():
     def __init__(self):
@@ -180,15 +196,12 @@ class DataStream():
 
     def register_processor(self, proc: DataProcessor) -> None:
         if (isinstance(proc, NumericProcessor)):
-            print("Registering Numeric Processor...")
             self.processor_list.append(proc)
             print("Numeric processor registered successfully!")
         elif (isinstance(proc, TextProcessor)):
-            print("Registering Text Processor...")
             self.processor_list.append(proc)
             print("Text processor registered successfully!")
         elif (isinstance(proc, LogProcessor)):
-            print("Registering Log Processor...")
             self.processor_list.append(proc)
             print("Log processor registered successfully!")
         else:
@@ -222,7 +235,11 @@ class DataStream():
                 print("Value {}: {}".format(index, value))
 
     def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
-        ...
+        for processor in self.processor_list:
+            lista = []
+            for _i in range(nb):
+                lista.append(processor.output())
+            plugin.process_output(self, lista)
 
 
 if __name__ == "__main__":
@@ -244,4 +261,4 @@ if __name__ == "__main__":
         42,
         ['Hi', 'five']
     ])
-    data_stream.print_processors_stats()
+    data_stream.output_pipeline(35, CsvExportPlugin)
