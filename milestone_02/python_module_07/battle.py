@@ -1,30 +1,8 @@
-from ex00 import CreatureFactory, FlameFactory, AquaFactory
+from ex0 import CreatureFactory, FlameFactory, AquaFactory
 
 
 class InvalidFactoryException(Exception):
     ...
-
-
-fire_base_data = {
-    "name": "Flameling",
-    "type": "Fire",
-    "technique": "Ember"
-}
-fire_evolved_data = {
-    "name": "Pyrodon",
-    "type": "Magma",
-    "technique": "Magma Swm"
-}
-aqua_base_data = {
-    "name": "Aquabub",
-    "type": "Water",
-    "technique": "Water Gun"
-}
-aqua_evolved_data = {
-    "name": "Torragon",
-    "type": "Ice",
-    "technique": "Blizzard"
-}
 
 
 def test_factory(
@@ -33,39 +11,26 @@ def test_factory(
             or not callable(factory.create_evolved)):
         raise InvalidFactoryException("Invalid Factory")
     print("Testing factory")
-    base_name, base_type, base_technique = (
-        fire_base_data.values()
-        if isinstance(factory, FlameFactory)
-        else aqua_base_data.values())
-    evolved_name, evolved_type, evolved_technique = (
-        fire_evolved_data.values()
-        if isinstance(factory, FlameFactory)
-        else aqua_evolved_data.values())
-    base = factory.create_base(
-        base_name, base_type, base_technique)
+    base = factory.create_base()
     print(base.describe())
     print(base.attack())
-    evolved = factory.create_evolved(
-        evolved_name, evolved_type, evolved_technique)
+    evolved = factory.create_evolved()
     print(evolved.describe())
     print(evolved.attack())
 
 
 def simulate_battle(
-        flame_factory: FlameFactory, aqua_factory: AquaFactory) -> None:
-    base_name, base_type, base_technique = fire_base_data.values()
-    flameling = flame_factory.create_base(
-        base_name, base_type, base_technique)
-    base_name, base_type, base_technique = aqua_base_data.values()
-    aquabub = aqua_factory.create_evolved(
-        base_name, base_type, base_technique)
+        first_factory: CreatureFactory,
+        second_factory: CreatureFactory) -> None:
+    first_creature = first_factory.create_base()
+    second_creature = second_factory.create_base()
     print(f"""
-{flameling.describe()}
+{first_creature.describe()}
     vs.
-{aquabub.describe()}
+{second_creature.describe()}
     fight!
-{flameling.attack()}
-{aquabub.attack()}
+{first_creature.attack()}
+{second_creature.attack()}
     """)
 
 

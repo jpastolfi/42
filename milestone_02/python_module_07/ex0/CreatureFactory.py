@@ -4,9 +4,9 @@ from .Creature import Creature
 
 class CreatureFactory(ABC):
     @abstractmethod
-    def create_base(self, name: str, type: str, technique: str) -> Creature:
+    def create_base(self) -> Creature:
         ...
 
     @abstractmethod
-    def create_evolved(self, name: str, type: str, technique: str):
+    def create_evolved(self) -> Creature:
         ...

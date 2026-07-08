@@ -6,10 +6,11 @@ class Creature(ABC):
         self.name = name
         self.technique = technique
         self.type = type
+        super().__init__()
 
     @abstractmethod
-    def attack(self):
-        ...
+    def attack(self) -> str:
+        return f"{self.name} is attacking!"
 
     def describe(self) -> str:
-        return "I'm a {} creature called {}".format(self.type, self.name)
+        return f"I'm a {self.type} creature called {self.name}"
