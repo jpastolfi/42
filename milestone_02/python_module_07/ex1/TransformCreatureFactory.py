@@ -4,7 +4,7 @@ from .Morphagon import Morphagon
 
 transform_base_data = {
     "name": "Shiftling",
-    "type": "Normal",
+    "type": "Adaptive",
     "technique": "Mimic"
 }
 transform_evolved_data = {

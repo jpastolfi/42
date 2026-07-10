@@ -7,9 +7,6 @@ class Shiftling(Creature, TransformCapability):
         return ("Evolved Shiftling is attacking!"
                 if self.is_evolved else "Shiftling is attacking!")
 
-    def describe(self) -> str:
-        return "Hi, I'm a Shiftling!"
-
     def transform(self):
         return super().transform()
 
