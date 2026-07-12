@@ -23,7 +23,7 @@ Package installation path: {",".join(site.getsitepackages())}""")
 def display_global() -> None:
     print(f"""MATRIX STATUS: You're still plugged in
 
-Current Python: {os.path.dirname(sys.executable)}
+Current Python: {sys.executable}
 Virtual Environment: None detected
 
 WARNING: You're in the global environment!
