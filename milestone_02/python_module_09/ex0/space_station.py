@@ -49,7 +49,7 @@ def main():
         print("=============================================")
     except ValidationError as e:
         for item in e.errors():
-            print(f"Error in field '{item['loc'][0]}': {item['msg']}")
+            print(f"Error: {item['msg']}")
 
 
 if __name__ == "__main__":
