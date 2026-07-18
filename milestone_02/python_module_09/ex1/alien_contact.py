@@ -1,4 +1,3 @@
-from uuid import uuid4
 from random import randint, uniform
 from datetime import datetime
 from enum import Enum
@@ -142,9 +141,11 @@ def main():
             witness_count=randint(1, 100),
             is_verified=True
         )
+        print(invalid_contact)
     except ValidationError as e:
         for item in e.errors():
             print(f"Error: {item['msg']}")
+
 
 if __name__ == "__main__":
     main()
