@@ -1,7 +1,7 @@
 # map, filter, sorted, min, max, round, sum, len
 
 def artifact_sorter(artifacts: list[dict]) -> list[dict]:
-    return sorted(artifacts, key=lambda x: x["power"])
+    return sorted(artifacts, key=lambda x: x["power"], reverse=True)
 
 
 def power_filter(mages: list[dict], min_power: int) -> list[dict]:
@@ -25,46 +25,60 @@ def mage_stats(mages: list[dict]) -> dict:
 if __name__ == "__main__":
     artifacts = [
             {
-                "name": "AB",
-                "power": 2,
-                "type": "AB",
+                "name": "Infinity Gauntlet",
+                "power": 100,
+                "type": "Cosmic",
             },
             {
-                "name": "CD",
-                "power": 3,
-                "type": "CD",
+                "name": "The One Ring",
+                "power": 80,
+                "type": "Magic",
             },
-            {
-                "name": "EF",
-                "power": 1,
-                "type": "EF",
-            }
     ]
-    print("Testing artifact sorter...")
-    print(artifact_sorter(artifacts))
-
+    print("====================================================")
+    print("Here's the list of artifacts: \n")
+    for art in artifact_sorter(artifacts):
+        print(
+            f"{art['name']} of type {art['type']}",
+            f"and a power of {art['power']}"
+            )
+    print("====================================================\n")
     mages = [
             {
-                "name": "AB",
-                "power": 35,
-                "element": "AB",
+                "name": "Merlin",
+                "power": 86,
+                "element": "Water",
             },
             {
-                "name": "CD",
-                "power": 31,
-                "element": "CD",
+                "name": "Gandalf",
+                "power": 70,
+                "element": "Light",
             },
             {
-                "name": "EF",
-                "power": 43,
-                "element": "EF",
+                "name": "Doctor Strange",
+                "power": 90,
+                "element": "Dark",
             }
     ]
-    print("Testing mages filter...")
-    print(power_filter(mages, 1))
+    print("====================================================")
+    print("Here's the list of filtered mages: \n")
+    for mage in power_filter(mages, 80):
+        print(
+            f"{mage['name']} of element {mage['element']}",
+            f"and a power of {mage['power']}"
+            )
+    print("====================================================\n")
 
-    mages_names = ["AB", "CD", "EF"]
+    spells: list[str] = ["Fireball", "Blizzard", "Water blast"]
+    print("====================================================")
+    print("Here's the list of transformed spells: \n")
+    for spell in spell_transformer(spells):
+        print(spell)
+    print("====================================================\n")
 
-    print(spell_transformer(mages_names))
-
-    print(mage_stats(mages))
+    print("====================================================")
+    print("Here's the list of mage stats: \n")
+    print(f"Most powerful power level: {mage_stats(mages)['max_power']}")
+    print(f"Least powerful power level: {mage_stats(mages)['min_power']}")
+    print(f"Average power level: {mage_stats(mages)['avg_power']}")
+    print("====================================================\n")
