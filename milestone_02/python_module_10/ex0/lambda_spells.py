@@ -35,14 +35,6 @@ if __name__ == "__main__":
                 "type": "Magic",
             },
     ]
-    print("====================================================")
-    print("Here's the list of artifacts: \n")
-    for art in artifact_sorter(artifacts):
-        print(
-            f"{art['name']} of type {art['type']}",
-            f"and a power of {art['power']}"
-            )
-    print("====================================================\n")
     mages = [
             {
                 "name": "Merlin",
@@ -60,25 +52,56 @@ if __name__ == "__main__":
                 "element": "Dark",
             }
     ]
-    print("====================================================")
-    print("Here's the list of filtered mages: \n")
-    for mage in power_filter(mages, 80):
-        print(
-            f"{mage['name']} of element {mage['element']}",
-            f"and a power of {mage['power']}"
-            )
-    print("====================================================\n")
-
     spells: list[str] = ["Fireball", "Blizzard", "Water blast"]
-    print("====================================================")
-    print("Here's the list of transformed spells: \n")
-    for spell in spell_transformer(spells):
-        print(spell)
-    print("====================================================\n")
+    print("""Interactive tester for lambda_spells.""")
+    print("=" * 50)
+    print()
 
-    print("====================================================")
-    print("Here's the list of mage stats: \n")
-    print(f"Most powerful power level: {mage_stats(mages)['max_power']}")
-    print(f"Least powerful power level: {mage_stats(mages)['min_power']}")
-    print(f"Average power level: {mage_stats(mages)['avg_power']}")
-    print("====================================================\n")
+    while True:
+        print("Choose an option:")
+        print("0. Test artifact_sorter")
+        print("1. Test power_filter")
+        print("2. Test spell_transformer")
+        print("3. Test mage_stats")
+        print("q. Quit")
+        print()
+
+        choice = input("Enter your choice: ").strip().lower()
+        match choice:
+            case "0":
+                print("=" * 50)
+                print("Here's the list of artifacts: \n")
+                for art in artifact_sorter(artifacts):
+                    print(
+                        f"{art['name']} of type {art['type']}",
+                        f"and a power of {art['power']}"
+                        )
+                print("=" * 50)
+            case "1":
+                print("=" * 50)
+                print("Here's the list of filtered mages: \n")
+                for mage in power_filter(mages, 80):
+                    print(
+                        f"{mage['name']} of element {mage['element']}",
+                        f"and a power of {mage['power']}"
+                        )
+                print("=" * 50)
+            case "2":
+                print("=" * 50)
+                print("Here's the list of transformed spells: \n")
+                for spell in spell_transformer(spells):
+                    print(spell)
+                print("=" * 50)
+            case "3":
+                print("=" * 50)
+                print("Here's the list of mage stats: \n")
+                print("Most powerful power level: ",
+                      f"{mage_stats(mages)['max_power']}")
+                print("Least powerful power level: ",
+                      f"{mage_stats(mages)['min_power']}")
+                print("Average power level: ",
+                      f"{mage_stats(mages)['avg_power']}")
+                print("=" * 50)
+            case _:
+                print("Bye bye")
+                break

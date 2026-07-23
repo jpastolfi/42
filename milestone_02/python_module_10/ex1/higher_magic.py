@@ -41,27 +41,46 @@ if __name__ == "__main__":
     def fireball(target: str, power: int) -> str:
         return f"{target} damages the target for {power} HP"
 
-    print("====================================================")
-    print("Testing spell combiner")
-    print(spell_combiner(heal, fireball)("Dragon", 10))
-    print("====================================================\n")
-
-    print("====================================================")
-    print("Testing power amplifier")
-    print(power_amplifier(heal, 5)("Dragon", 10))
-    print("====================================================\n")
-
     def is_strong(target: str, power: int) -> bool:
         if power > 5:
             return True
         return False
 
-    print("====================================================")
-    print("Testing conditional caster")
-    print(conditional_caster(is_strong, fireball)("Dragon", 10))
-    print("====================================================\n")
+    print("""Interactive tester for lambda_spells.""")
+    print("=" * 50)
+    print()
 
-    print("====================================================")
-    print("Testing spell sequence")
-    print(spell_sequence([heal, bless, fireball])("Dragon", 10))
-    print("====================================================\n")
+    while True:
+        print("Choose an option:")
+        print("0. Test spell_combiner")
+        print("1. Test power_amplifier")
+        print("2. Test conditional_caster")
+        print("3. Test spell_sequence")
+        print("q. Quit")
+        print()
+
+        choice = input("Enter your choice: ").strip().lower()
+        match choice:
+            case "0":
+                print("=" * 50)
+                print("Testing spell combiner")
+                print(spell_combiner(heal, fireball)("Dragon", 10))
+                print("=" * 50)
+            case "1":
+                print("=" * 50)
+                print("Testing power amplifier")
+                print(power_amplifier(heal, 5)("Dragon", 10))
+                print("=" * 50)
+            case "2":
+                print("=" * 50)
+                print("Testing conditional caster")
+                print(conditional_caster(is_strong, fireball)("Dragon", 10))
+                print("=" * 50)
+            case "3":
+                print("=" * 50)
+                print("Testing spell sequence")
+                print(spell_sequence([heal, bless, fireball])("Dragon", 10))
+                print("=" * 50)
+            case _:
+                print("Bye bye")
+                break
