@@ -29,7 +29,7 @@ My project portfolio from the 42 Lisbon software engineering programme. The curr
 | Project | Description | Skills |
 |---------|-------------|--------|
 | **[Born2beRoot](milestone_02/born2beroot/)** | System administration project focused on setting up a hardened Linux virtual machine from scratch, enforcing strict security policies, configuring services and users, and automating monitoring. | Virtualization (VirtualBox / UTM), Linux (Debian / Rocky), SSH, UFW firewall, sudo policies, LVM partitioning, shell scripting, cron |
-| **[A-Maze-ing](milestone_02/a-maze-ing/)** | A maze generator that produces and renders perfect mazes (one unique path between any two points). The generator is configurable via an input file and outputs a visual representation of the result. Closely related to spanning tree algorithms. | C, graph theory, maze generation algorithms (Prim's / Kruskal's / recursive backtracker), file I/O, algorithmic thinking |
+| **[A-Maze-ing](milestone_02/a-maze-ing/)** | A maze generator that produces and renders perfect mazes (one unique path between any two points). The generator is configurable via an input file and outputs a visual representation of the result. Closely related to spanning tree algorithms. | Python, graph theory, maze generation algorithms (Prim's / Kruskal's / recursive backtracker), type hints & mypy, flake8, pytest/unittest, pip packaging, file I/O |
 
 ### Python for Data Engineering (Modules 00–10)
 
