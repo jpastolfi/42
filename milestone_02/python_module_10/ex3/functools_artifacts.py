@@ -60,7 +60,7 @@ def spell_dispatcher() -> Callable[[Any], str]:
 
 
 if __name__ == "__main__":
-    print("""Interactive tester for scope_mysteries.""")
+    print("""Interactive tester for functools_artifacts.""")
     print("=" * 50)
     print()
 
